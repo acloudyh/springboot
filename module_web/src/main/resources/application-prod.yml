@@ -7,11 +7,6 @@ server:
 
 # Set here configurations for the database connection
 spring:
-  batch:
-    initializer:
-      enabled: false
-    job:
-      enabled: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
@@ -33,7 +28,7 @@ spring:
 
 # Show or not log for each sql query
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
     # Hibernate ddl auto (create, create-drop, update): with "update" the database
