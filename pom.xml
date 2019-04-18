@@ -18,17 +18,13 @@
 		<module.version>1.8.0-RELEASE</module.version>
 
 		<maven.test.skip>true</maven.test.skip>
-
 		<java.version>1.8</java.version>
 		<HikariCP.version>2.5.1</HikariCP.version>
 		<mysql-driver.version>5.1.40</mysql-driver.version>
 		<hibernate-spatial.version>5.1.0.Final</hibernate-spatial.version>
 		<log4jdbc.version>0.2.7</log4jdbc.version>
 		<lombok.version>1.16.10</lombok.version>
-		<mqtt-client.version>1.14</mqtt-client.version>
-		<mqtt-paho.version>1.1.0</mqtt-paho.version>
 		<springfox.version>2.9.2</springfox.version>
-
 		<jjwt.version>0.7.0</jjwt.version>
 		<spring-mobile-device.version>1.1.4.RELEASE</spring-mobile-device.version>
 		<commons-codec.version>1.10</commons-codec.version>
@@ -39,11 +35,8 @@
 		<quartz-scheduler.version>2.2.3</quartz-scheduler.version>
 		<httpclient.version>4.5.2</httpclient.version>
 		<csv-version>2.4.0</csv-version>
-		<spring-kafka.version>1.2.0.RELEASE</spring-kafka.version>
-		<netty.version>4.1.6.Final</netty.version>
 		<fastjson.version>1.2.49</fastjson.version>
 		<commons-collections4.version>4.1</commons-collections4.version>
-
 		<h2.version>1.4.190</h2.version>
 		<gson.version>2.8.0</gson.version>
 		<apache.poi.version>3.16</apache.poi.version>
@@ -131,18 +124,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.fusesource.mqtt-client</groupId>
-				<artifactId>mqtt-client</artifactId>
-				<version>${mqtt-client.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.eclipse.paho</groupId>
-				<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-				<version>${mqtt-paho.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>io.springfox</groupId>
 				<artifactId>springfox-swagger2</artifactId>
 				<version>${springfox.version}</version>
@@ -153,8 +134,6 @@
 				<artifactId>springfox-swagger-ui</artifactId>
 				<version>${springfox.version}</version>
 			</dependency>
-
-
 
 			<dependency>
 				<groupId>io.jsonwebtoken</groupId>
@@ -220,18 +199,6 @@
 				<version>${csv-version}</version>
 			</dependency>
 
-            <!-- spring-kafka -->
-            <dependency>
-                <groupId>org.springframework.kafka</groupId>
-                <artifactId>spring-kafka</artifactId>
-                <version>${spring-kafka.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.kafka</groupId>
-                <artifactId>spring-kafka-test</artifactId>
-                <version>${spring-kafka.version}</version>
-                <scope>test</scope>
-            </dependency>
 
 			<dependency>
 				<groupId>com.h2database</groupId>
@@ -244,16 +211,11 @@
 				<artifactId>gson</artifactId>
 				<version>${gson.version}</version>
 			</dependency>
+
 			<dependency>
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi-ooxml</artifactId>
 				<version>${apache.poi.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>io.netty</groupId>
-				<artifactId>netty-all</artifactId>
-				<version>${netty.version}</version>
 			</dependency>
 
 			<dependency>

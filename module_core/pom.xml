@@ -24,6 +24,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.springboot</groupId>
+            <artifactId>module_common</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <exclusions>
@@ -59,16 +64,6 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.fusesource.mqtt-client</groupId>
-            <artifactId>mqtt-client</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.paho</groupId>
-            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
         </dependency>
 
         <dependency>
@@ -156,16 +151,6 @@
             <artifactId>super-csv</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.springboot</groupId>
-            <artifactId>module_common</artifactId>
-        </dependency>
-
-        <!-- spring-kafka -->
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
