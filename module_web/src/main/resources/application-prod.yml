@@ -1,0 +1,48 @@
+server:
+  port: 8888
+
+# ===============================
+# = DATA SOURCE
+# ===============================
+
+# Set here configurations for the database connection
+spring:
+  batch:
+    initializer:
+      enabled: false
+    job:
+      enabled: false
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 6yhn^YHN
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 20
+      connection-timeout: 10000
+      idle-timeout: 300000
+      max-lifetime: 900000
+# ===============================
+# = JPA / HIBERNATE
+# ===============================
+
+# Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+# stripped before adding them to the entity manager).
+
+# Show or not log for each sql query
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    # Hibernate ddl auto (create, create-drop, update): with "update" the database
+# schema will be automatically updated accordingly to java entities found in
+# the project
+#spring.jpa.hibernate.ddl-auto = update
+
+# Allows Hibernate to generate SQL optimized for a particular DBMS  MySQL57InnoDBDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.mysql.MySQL5InnoDBSpatialDialect
+
