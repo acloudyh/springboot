@@ -1,8 +1,13 @@
 package com.yang.springboot.service;
 
+import com.yang.springboot.domain.Waybill;
 import com.yang.springboot.dto.WaybillDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author yanghao
@@ -50,4 +55,22 @@ public interface WaybillService {
      * @return
      */
     Page<WaybillDto> listWaybill(WaybillDto dto, Pageable pageable);
+
+
+    /**
+     * 测试用
+     * @param waybills
+     */
+    void createBatchWaybill(List<Waybill> waybills);
+
+    /**
+     * 导出运单
+     *
+     * @param dto
+     * @param response
+     * @throws IOException
+     */
+    void exportWaybill(WaybillDto dto, HttpServletResponse response) throws IOException;
+
+
 }

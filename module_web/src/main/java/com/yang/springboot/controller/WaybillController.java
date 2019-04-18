@@ -1,5 +1,6 @@
 package com.yang.springboot.controller;
 
+import com.yang.springboot.domain.Waybill;
 import com.yang.springboot.dto.WaybillDto;
 import com.yang.springboot.req.WaybillCreateRequest;
 import com.yang.springboot.req.WaybillQueryRequest;
@@ -17,7 +18,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author yanghao
@@ -70,5 +75,37 @@ public class WaybillController {
         BeanUtils.copyProperties(request, dto);
         return waybillService.listWaybill(dto, pageable);
     }
+
+    @RequestMapping(value = "/batch", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("批量创建运单，测试导出文件的功能,内部写死")
+    public void createBatchWaybill() {
+        long startTime = System.currentTimeMillis();
+        List<Waybill> waybills = new ArrayList<>();
+
+        for (int i = 0; i < 50000; i++) {
+            Waybill waybill = new Waybill();
+            waybill.setBillCode("wb" + i);
+            waybill.setCarrierEmail(i + "@qq.com");
+            waybill.setCarrierName("王刚" + i);
+            waybills.add(waybill);
+        }
+
+        waybillService.createBatchWaybill(waybills);
+
+        long endTime = System.currentTimeMillis();
+        log.info("插入5万条数据耗时:{} ms", endTime - startTime);
+    }
+
+    @RequestMapping(value = "/export", method = RequestMethod.GET)
+    public void exportStudents(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
+        long startTime = System.currentTimeMillis();
+        WaybillDto dto = new WaybillDto();
+        BeanUtils.copyProperties(request, dto);
+        waybillService.exportWaybill(dto, response);
+        long endTime = System.currentTimeMillis();
+        log.info("导出5万条数据耗时:{} ms", endTime - startTime);
+    }
+
 
 }
