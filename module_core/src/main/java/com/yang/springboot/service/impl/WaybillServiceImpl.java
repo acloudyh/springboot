@@ -1,18 +1,25 @@
 package com.yang.springboot.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
-import com.yang.springboot.domain.Waybill;
+import com.yang.springboot.common.constants.ExportConstants;
+import com.yang.springboot.common.utils.DateUtil;
+import com.yang.springboot.common.utils.ExcelUtil;
+import com.yang.springboot.common.utils.MailUtil;
+import com.yang.springboot.common.utils.SqlUtil;
+import com.yang.springboot.config.MailConfig;
+import com.yang.springboot.domain.jpa.Waybill;
 import com.yang.springboot.dto.WaybillDto;
 import com.yang.springboot.repo.WaybillRepo;
 import com.yang.springboot.service.WaybillService;
-import com.yang.springboot.utils.ExcelUtil;
-import com.yang.springboot.utils.SqlUtils;
 import io.jsonwebtoken.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -36,6 +43,15 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
 
     @Resource
     private WaybillRepo waybillRepo;
+
+    @Resource
+    private MailConfig mailConfig;
+
+    @Resource
+    private TemplateEngine templateEngine;
+
+    @Resource
+    private JavaMailSender javaMailSender;
 
     @Override
     public WaybillDto createWaybill(WaybillDto dto) {
@@ -87,17 +103,17 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
         List<Predicate> predicates = new ArrayList<>();
         String billCode = dto.getBillCode();
         if (billCode != null) {
-            predicates.add(cb.like(root.get("billCode"), SqlUtils.wrapLike(billCode)));
+            predicates.add(cb.like(root.get("billCode"), SqlUtil.wrapLike(billCode)));
         }
 
         String carrierName = dto.getCarrierName();
         if (carrierName != null) {
-            predicates.add(cb.like(root.get("carrierName"), SqlUtils.wrapLike(carrierName)));
+            predicates.add(cb.like(root.get("carrierName"), SqlUtil.wrapLike(carrierName)));
         }
 
         String carrierEmail = dto.getCarrierEmail();
         if (carrierEmail != null) {
-            predicates.add(cb.like(root.get("billCode"), SqlUtils.wrapLike(carrierEmail)));
+            predicates.add(cb.like(root.get("billCode"), SqlUtil.wrapLike(carrierEmail)));
         }
         return predicates;
     }
@@ -122,25 +138,29 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
             int count = waybillDtos.size();
             JSONArray jsonArray = new JSONArray(waybillDtos);
             String title = "运单信息导出";
-            //获取属性-列头
+            // 表头，key是获取数据时将要调用的get方法，value是显示的列标题
             Map<String, String> headMap = new LinkedHashMap<>();
-            headMap.put("id", "id");
             headMap.put("billCode", "运单号");
             headMap.put("carrierName", "承运人姓名");
             headMap.put("createdTime", "创建时间");
             headMap.put("carrierEmail", "推送邮箱");
 
-            if (count < 100000) {
+            if (count < ExportConstants.MID_LIMIT) {
                 ExcelUtil.downloadExcelFile(title, headMap, jsonArray, response);
             } else {
-//                CompletableFuture.runAsync(() -> {
-//                    InputStream inputStream = ExcelUtil.getExcelInputStream(title, headMap, jsonArray);
-//                    MailUtil.MailParam param = new MailUtil.MailParam(mailProperties.getUsername(), securityService.currentEmail(), "运单信息", "运单数据已导出excel，请查收附件", inputStream);
-//                    MailUtil.sendExcelMail(param, javaMailSender);
-//                });
-//                PrintWriter out = response.getWriter();
-//                out.print("数据导出，下载地址稍后发送到您的邮箱");
-//                out.flush();
+                CompletableFuture.runAsync(() -> {
+                    InputStream inputStream = ExcelUtil.getExcelInputStream(title, headMap, jsonArray);
+
+                    Context context = new Context();
+                    context.setVariable("createdTime", DateUtil.formatTimestampDate(new Date()));
+                    String content = templateEngine.process("email", context);
+
+                    MailUtil.MailParam param = new MailUtil.MailParam(mailConfig.getFrom(), mailConfig.getTo(), "运单信息", content, inputStream);
+                    MailUtil.sendExcelMail(param, javaMailSender);
+                });
+                PrintWriter out = response.getWriter();
+                out.print("数据导出，下载地址稍后发送到您的邮箱");
+                out.flush();
             }
         }
     }

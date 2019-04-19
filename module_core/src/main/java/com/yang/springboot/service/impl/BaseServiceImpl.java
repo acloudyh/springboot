@@ -1,6 +1,6 @@
 package com.yang.springboot.service.impl;
 
-import com.yang.springboot.utils.ModelConvert;
+import com.yang.springboot.common.utils.ModelConvert;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

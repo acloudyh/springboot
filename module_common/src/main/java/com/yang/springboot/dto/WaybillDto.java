@@ -1,5 +1,6 @@
 package com.yang.springboot.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,6 +12,7 @@ import java.util.Date;
  * @date 2019-04-18 16:52
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "Waybill", description = "运单")
 public class WaybillDto {
 

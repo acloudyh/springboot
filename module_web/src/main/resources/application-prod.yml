@@ -41,3 +41,24 @@ spring:
       hibernate:
         dialect: org.hibernate.spatial.dialect.mysql.MySQL5InnoDBSpatialDialect
 
+# email配置
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 11@qq.com
+    password: 11
+    from: 11@qq.com
+    to: 11@qq.com
+    protocol: smtp
+    default-encoding: utf-8
+    sendPoolSize: 1
+    sendTimeout: 30
+    open: true
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML5

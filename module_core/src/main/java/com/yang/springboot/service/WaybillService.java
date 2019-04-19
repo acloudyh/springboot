@@ -1,6 +1,6 @@
 package com.yang.springboot.service;
 
-import com.yang.springboot.domain.Waybill;
+import com.yang.springboot.domain.jpa.Waybill;
 import com.yang.springboot.dto.WaybillDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

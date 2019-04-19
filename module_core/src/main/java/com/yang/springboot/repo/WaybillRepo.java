@@ -1,10 +1,10 @@
 package com.yang.springboot.repo;
 
-import com.yang.springboot.domain.Waybill;
+import com.yang.springboot.domain.jpa.Waybill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 /**
  * @author yanghao
@@ -17,7 +17,7 @@ public interface WaybillRepo extends JpaRepository<Waybill, String>, JpaSpecific
      *
      * @param billCode
      */
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     void deleteByBillCode(String billCode);
 
     /**

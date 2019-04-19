@@ -11,7 +11,6 @@ import org.hibernate.validator.constraints.Email;
 @Data
 public class WaybillUpdateRequest {
 
-
     @ApiModelProperty(value = "承运人姓名")
     private String carrierName;
 

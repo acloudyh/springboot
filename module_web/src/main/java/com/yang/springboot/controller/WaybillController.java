@@ -1,6 +1,6 @@
 package com.yang.springboot.controller;
 
-import com.yang.springboot.domain.Waybill;
+import com.yang.springboot.domain.jpa.Waybill;
 import com.yang.springboot.dto.WaybillDto;
 import com.yang.springboot.req.WaybillCreateRequest;
 import com.yang.springboot.req.WaybillQueryRequest;
@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,11 +84,12 @@ public class WaybillController {
         long startTime = System.currentTimeMillis();
         List<Waybill> waybills = new ArrayList<>();
 
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i < 80000; i++) {
             Waybill waybill = new Waybill();
             waybill.setBillCode("wb" + i);
             waybill.setCarrierEmail(i + "@qq.com");
             waybill.setCarrierName("王刚" + i);
+            waybill.setCreatedTime(new Date());
             waybills.add(waybill);
         }
 
