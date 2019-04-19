@@ -1,4 +1,4 @@
-package com.yang.springboot.utils;
+package com.yang.springboot.common.utils;
 
 import io.jsonwebtoken.lang.Assert;
 
@@ -6,7 +6,7 @@ import io.jsonwebtoken.lang.Assert;
  * @author yanghao
  * @date 2019-04-18 18:02
  */
-public class SqlUtils {
+public class SqlUtil {
 
     public static  String wrapLike(String field){
         Assert.notNull(field,"field must not be null");

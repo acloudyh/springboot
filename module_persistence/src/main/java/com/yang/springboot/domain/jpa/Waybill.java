@@ -1,4 +1,4 @@
-package com.yang.springboot.domain;
+package com.yang.springboot.domain.jpa;
 
 import lombok.Data;
 

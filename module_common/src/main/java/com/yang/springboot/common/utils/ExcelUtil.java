@@ -1,11 +1,9 @@
-package com.yang.springboot.utils;
+package com.yang.springboot.common.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
@@ -23,6 +21,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @author yanghao
+ * @date 2019-04-19 11:51
+ */
 public class ExcelUtil {
     private static final Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
     //未定义的字段
@@ -53,7 +55,13 @@ public class ExcelUtil {
         }
     }
 
-    //Web 导出excel
+    /**
+     * 通过web调用方式直接导出Excel文件
+     * @param title
+     * @param headMap
+     * @param ja
+     * @param response
+     */
     public static void downloadExcelFile(String title, Map<String, String> headMap, JSONArray ja, HttpServletResponse response) {
         try {
             ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -73,12 +81,13 @@ public class ExcelUtil {
                 bos.write(buff, 0, bytesRead);
 
             }
+            // 自行在finally中处理流的关闭
             bis.close();
             bos.close();
             outputStream.flush();
             outputStream.close();
         } catch (Exception e) {
-            logger.error("导出excel异常", e);
+            logger.error("导出Excel操作时操作下载请求出现异常", e);
         }
     }
 
@@ -104,41 +113,44 @@ public class ExcelUtil {
     private static SXSSFWorkbook getSheets(String title, Map<String, String> headMap, JSONArray jsonArray, String datePattern, int colWidth) {
         if (datePattern == null) datePattern = DEFAULT_DATE_PATTERN;
         // 声明一个工作薄
-        SXSSFWorkbook workbook = new SXSSFWorkbook(1000);//缓存
+        //缓存
+        SXSSFWorkbook workbook = new SXSSFWorkbook(1000);
         workbook.setCompressTempFiles(true);
         //表头样式
         CellStyle titleStyle = workbook.createCellStyle();
-        titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        titleStyle.setAlignment(HorizontalAlignment.CENTER);
         Font titleFont = workbook.createFont();
         titleFont.setFontHeightInPoints((short) 20);
         titleFont.setBoldweight((short) 700);
         titleStyle.setFont(titleFont);
         // 列头样式
         CellStyle headerStyle = workbook.createCellStyle();
-        headerStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-        headerStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-        headerStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
-        headerStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
-        headerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        headerStyle.setBorderBottom(BorderStyle.THIN);
+        headerStyle.setBorderLeft(BorderStyle.THIN);
+        headerStyle.setBorderRight(BorderStyle.THIN);
+        headerStyle.setBorderTop(BorderStyle.THIN);
+        headerStyle.setAlignment(HorizontalAlignment.CENTER);
         Font headerFont = workbook.createFont();
         headerFont.setFontHeightInPoints((short) 12);
         headerFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
         headerStyle.setFont(headerFont);
+
         // 单元格样式
         CellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-        cellStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-        cellStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
-        cellStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
-//        cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-//        cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        cellStyle.setBorderBottom(BorderStyle.THIN);
+        cellStyle.setBorderLeft(BorderStyle.THIN);
+        cellStyle.setBorderRight(BorderStyle.THIN);
+        cellStyle.setBorderTop(BorderStyle.THIN);
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         Font cellFont = workbook.createFont();
         cellFont.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
         cellStyle.setFont(cellFont);
         // 生成一个(带标题)表格
         SXSSFSheet sheet = workbook.createSheet();
         //设置列宽
-        int minBytes = colWidth < DEFAULT_COLOUMN_WIDTH ? DEFAULT_COLOUMN_WIDTH : colWidth;//至少字节数
+        //至少字节数
+        int minBytes = colWidth < DEFAULT_COLOUMN_WIDTH ? DEFAULT_COLOUMN_WIDTH : colWidth;
         int[] arrColWidth = new int[headMap.size()];
         // 产生表格标题行,以及设置列宽
         String[] properties = new String[headMap.size()];
@@ -160,20 +172,26 @@ public class ExcelUtil {
         int rowIndex = 0;
         for (Object obj : jsonArray) {
             if (rowIndex == 65535 || rowIndex == 0) {
-                if (rowIndex != 0) sheet = workbook.createSheet();//如果数据超过了，则在第二页显示
+                //如果数据超过了，则在第二页显示
+                if (rowIndex != 0){
+                    sheet = workbook.createSheet();
+                }
 
-                SXSSFRow titleRow = sheet.createRow(0);//表头 rowIndex=0
+                //表头 rowIndex=0
+                SXSSFRow titleRow = sheet.createRow(0);
                 titleRow.createCell(0).setCellValue(title);
                 titleRow.getCell(0).setCellStyle(titleStyle);
                 sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, headMap.size() - 1));
 
-                SXSSFRow headerRow = sheet.createRow(1); //列头 rowIndex =1
+                //列头 rowIndex =1
+                SXSSFRow headerRow = sheet.createRow(1);
                 for (int i = 0; i < headers.length; i++) {
                     headerRow.createCell(i).setCellValue(headers[i]);
                     headerRow.getCell(i).setCellStyle(headerStyle);
 
                 }
-                rowIndex = 2;//数据内容从 rowIndex=2开始
+                //数据内容从 rowIndex=2开始
+                rowIndex = 2;
             }
             JSONObject jo = (JSONObject) JSONObject.toJSON(obj);
             SXSSFRow dataRow = sheet.createRow(rowIndex);
@@ -184,19 +202,23 @@ public class ExcelUtil {
                 String cellValue = "";
                 if (o == null) cellValue = "";
                 else if (o instanceof Date) cellValue = new SimpleDateFormat(datePattern).format(o);
-                else if (o instanceof Float || o instanceof Double)
+                else if (o instanceof Float || o instanceof Double) {
                     cellValue = new BigDecimal(o.toString()).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+                }
                 else cellValue = o.toString();
 
-                newCell.setCellValue(cellValue);
+                if (o instanceof Float || o instanceof Double || o instanceof BigDecimal) {
+                    newCell.setCellValue(Double.parseDouble(cellValue));
+                }else if(o instanceof Integer) {
+                    newCell.setCellValue(Integer.parseInt(cellValue));
+                }else{
+                    newCell.setCellValue(cellValue);
+                }
                 newCell.setCellStyle(cellStyle);
             }
             rowIndex++;
         }
-        // 自动调整宽度
-        /*for (int i = 0; i < headers.length; i++) {
-            sheet.autoSizeColumn(i);
-        }*/
+
         return workbook;
     }
 

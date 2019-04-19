@@ -1,4 +1,4 @@
-package com.yang.springboot.enums;
+package com.yang.springboot.common.enums;
 
 /**
  * @author yanghao

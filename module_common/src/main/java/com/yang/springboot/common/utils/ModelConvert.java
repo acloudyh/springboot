@@ -1,4 +1,4 @@
-package com.yang.springboot.utils;
+package com.yang.springboot.common.utils;
 
 import org.springframework.beans.BeanUtils;
 
