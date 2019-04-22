@@ -2,6 +2,9 @@
 
 ### 记录个人学习过程，不定期更新
 
+#### 2019.4.22
+1. 单机版redis Jackson2JsonRedisSerializer序列化类型（集群暂不做处理）
+
 #### 2019.4.19
 1. 导出文件工具类ExcelUtil
 2. 时间转换工具类DateUtil

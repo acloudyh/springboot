@@ -64,7 +64,7 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
         String key = RedisUtil.waybillKey(dto.getBillCode());
         WaybillDto waybillDto = toDto(waybillRepo.save(waybill), WaybillDto.class);
         RedisUtil.valueAdd(key, waybillDto, true, TimeUnit.MINUTES, redisTemplate);
-        return  waybillDto;
+        return waybillDto;
     }
 
 
