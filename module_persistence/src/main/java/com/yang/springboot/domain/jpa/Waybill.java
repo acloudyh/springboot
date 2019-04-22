@@ -3,6 +3,7 @@ package com.yang.springboot.domain.jpa;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "yh_waybill")
-public class Waybill {
+public class Waybill implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

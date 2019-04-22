@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "Waybill", description = "运单")
-public class WaybillDto {
+public class WaybillDto implements Serializable {
 
 
     @ApiModelProperty(value = "运单号")

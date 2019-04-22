@@ -2,10 +2,7 @@ package com.yang.springboot.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.yang.springboot.common.constants.ExportConstants;
-import com.yang.springboot.common.utils.DateUtil;
-import com.yang.springboot.common.utils.ExcelUtil;
-import com.yang.springboot.common.utils.MailUtil;
-import com.yang.springboot.common.utils.SqlUtil;
+import com.yang.springboot.common.utils.*;
 import com.yang.springboot.config.MailConfig;
 import com.yang.springboot.domain.jpa.Waybill;
 import com.yang.springboot.dto.WaybillDto;
@@ -16,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
@@ -31,6 +29,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -53,12 +52,19 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     @Resource
     private JavaMailSender javaMailSender;
 
+
+    @Resource(name = "redisTemplate")
+    private RedisTemplate redisTemplate;
+
     @Override
     public WaybillDto createWaybill(WaybillDto dto) {
         Assert.isNull(waybillRepo.findOneByBillCode(dto.getBillCode()), "运单已存在");
         Waybill waybill = toDomain(dto, Waybill.class);
         waybill.setCreatedTime(new Date());
-        return toDto(waybillRepo.save(waybill), WaybillDto.class);
+        String key = RedisUtil.waybillKey(dto.getBillCode());
+        WaybillDto waybillDto = toDto(waybillRepo.save(waybill), WaybillDto.class);
+        RedisUtil.valueAdd(key, waybillDto, true, TimeUnit.MINUTES, redisTemplate);
+        return  waybillDto;
     }
 
 
@@ -85,7 +91,17 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
 
     @Override
     public WaybillDto getWaybillByBillCode(String billCode) {
-        return toDto(waybillRepo.findOneByBillCode(billCode), WaybillDto.class);
+        WaybillDto waybillDto = new WaybillDto();
+
+        waybillDto = RedisUtil.valueGet(RedisUtil.waybillKey(billCode), redisTemplate);
+        if (waybillDto != null) {
+            log.info("走了redis缓存");
+        } else {
+            waybillDto = toDto(waybillRepo.findOneByBillCode(billCode), WaybillDto.class);
+            log.info("没有走redis缓存");
+        }
+
+        return waybillDto;
     }
 
     @Override
