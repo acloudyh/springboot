@@ -34,6 +34,7 @@ public interface WaybillService {
 
     /**
      * 更改运单
+     *
      * @param dto
      * @return
      */
@@ -50,6 +51,7 @@ public interface WaybillService {
 
     /**
      * 运单分页接口
+     *
      * @param dto
      * @param pageable
      * @return
@@ -59,6 +61,7 @@ public interface WaybillService {
 
     /**
      * 测试用
+     *
      * @param waybills
      */
     void createBatchWaybill(List<Waybill> waybills);

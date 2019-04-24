@@ -5,12 +5,12 @@
     <property name="LOG_HOME" value="${user.dir}/logs/"/>
     <property name="APP_NAME" value="module-web-server"/>
 
-    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
 
     <root level="INFO">
-        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="CONSOLE"/>
     </root>
 
     <logger name="org.springframework.web.servlet.mvc.method.annotation" level="error"/>

@@ -22,6 +22,7 @@ public interface WaybillRepo extends JpaRepository<Waybill, String>, JpaSpecific
 
     /**
      * 查询运单
+     *
      * @param billCode
      * @return
      */

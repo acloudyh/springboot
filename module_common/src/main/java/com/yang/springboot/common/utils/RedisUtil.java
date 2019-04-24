@@ -10,26 +10,26 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisUtil {
 
-    private static String REDIS_KEY = "REDIS_KEY_%s";
-
     /**
      * 默认过期时长
      */
     public static final long DEFAULT_EXPIRE = 60L;
-
+    private static String REDIS_KEY = "REDIS_KEY_%s";
 
     /**
      * 生成key
+     *
      * @param billCode
      * @return
      */
-    public static String waybillKey(String billCode){
-        return String.format(REDIS_KEY,billCode);
+    public static String waybillKey(String billCode) {
+        return String.format(REDIS_KEY, billCode);
     }
 
 
     /**
      * 保存redis
+     *
      * @param key
      * @param value
      * @param expire
@@ -38,7 +38,7 @@ public class RedisUtil {
      */
     public static void valueAdd(String key, Object value, boolean expire, TimeUnit timeUnit, RedisTemplate redisTemplate) {
         redisTemplate.opsForValue().set(key, value);
-        if (expire){
+        if (expire) {
             redisTemplate.expire(key, DEFAULT_EXPIRE, timeUnit);
         }
     }
@@ -46,16 +46,18 @@ public class RedisUtil {
 
     /**
      * 根据key删除redis
+     *
      * @param key
      * @param redisTemplate
      */
-    public static void valueDelete(String key,RedisTemplate redisTemplate){
+    public static void valueDelete(String key, RedisTemplate redisTemplate) {
         redisTemplate.delete(key);
     }
 
 
     /**
      * 根据key获取值
+     *
      * @param key
      * @param redisTemplate
      * @param <T>

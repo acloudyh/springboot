@@ -72,7 +72,7 @@ public class MailUtil {
             helper.setFrom(mailParam.getFrom());
             helper.setTo(mailParam.getTo());
             helper.setSubject(mailParam.getSubject());
-            helper.setText(mailParam.getContent(),true);
+            helper.setText(mailParam.getContent(), true);
             String fileName = mailParam.getSubject() + ".xlsx";
             //添加多个附件可以使用多条x
             //helper.addAttachment(fileName,file);
@@ -88,14 +88,6 @@ public class MailUtil {
 
     @Data
     public static class MailParam {
-        public MailParam(String from, String to, String subject, String content, InputStream inputStream) {
-            this.from = from;
-            this.to = to;
-            this.subject = subject;
-            this.content = content;
-            this.inputStream = inputStream;
-        }
-
         /**
          * 发送带附件的邮件
          * to       接受者
@@ -109,6 +101,13 @@ public class MailUtil {
         private String content;
         private String filePath;
         private InputStream inputStream;
+        public MailParam(String from, String to, String subject, String content, InputStream inputStream) {
+            this.from = from;
+            this.to = to;
+            this.subject = subject;
+            this.content = content;
+            this.inputStream = inputStream;
+        }
     }
 
 }

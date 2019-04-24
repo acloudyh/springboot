@@ -57,6 +57,7 @@ public class ExcelUtil {
 
     /**
      * 通过web调用方式直接导出Excel文件
+     *
      * @param title
      * @param headMap
      * @param ja
@@ -173,7 +174,7 @@ public class ExcelUtil {
         for (Object obj : jsonArray) {
             if (rowIndex == 65535 || rowIndex == 0) {
                 //如果数据超过了，则在第二页显示
-                if (rowIndex != 0){
+                if (rowIndex != 0) {
                     sheet = workbook.createSheet();
                 }
 
@@ -204,14 +205,13 @@ public class ExcelUtil {
                 else if (o instanceof Date) cellValue = new SimpleDateFormat(datePattern).format(o);
                 else if (o instanceof Float || o instanceof Double) {
                     cellValue = new BigDecimal(o.toString()).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
-                }
-                else cellValue = o.toString();
+                } else cellValue = o.toString();
 
                 if (o instanceof Float || o instanceof Double || o instanceof BigDecimal) {
                     newCell.setCellValue(Double.parseDouble(cellValue));
-                }else if(o instanceof Integer) {
+                } else if (o instanceof Integer) {
                     newCell.setCellValue(Integer.parseInt(cellValue));
-                }else{
+                } else {
                     newCell.setCellValue(cellValue);
                 }
                 newCell.setCellStyle(cellStyle);

@@ -8,8 +8,8 @@ import io.jsonwebtoken.lang.Assert;
  */
 public class SqlUtil {
 
-    public static  String wrapLike(String field){
-        Assert.notNull(field,"field must not be null");
+    public static String wrapLike(String field) {
+        Assert.notNull(field, "field must not be null");
         StringBuilder sb = new StringBuilder(64);
         sb.append("%").append(field).append("%");
         return sb.toString();

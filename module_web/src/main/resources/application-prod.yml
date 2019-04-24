@@ -19,29 +19,29 @@ spring:
       connection-timeout: 10000
       idle-timeout: 300000
       max-lifetime: 900000
-# ===============================
-# = JPA / HIBERNATE
-# ===============================
+  # ===============================
+  # = JPA / HIBERNATE
+  # ===============================
 
-# Use spring.jpa.properties.* for Hibernate native properties (the prefix is
-# stripped before adding them to the entity manager).
+  # Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+  # stripped before adding them to the entity manager).
 
-# Show or not log for each sql query
+  # Show or not log for each sql query
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
     # Hibernate ddl auto (create, create-drop, update): with "update" the database
-# schema will be automatically updated accordingly to java entities found in
-# the project
-#spring.jpa.hibernate.ddl-auto = update
+    # schema will be automatically updated accordingly to java entities found in
+    # the project
+    #spring.jpa.hibernate.ddl-auto = update
 
-# Allows Hibernate to generate SQL optimized for a particular DBMS  MySQL57InnoDBDialect
+    # Allows Hibernate to generate SQL optimized for a particular DBMS  MySQL57InnoDBDialect
     properties:
       hibernate:
         dialect: org.hibernate.spatial.dialect.mysql.MySQL5InnoDBSpatialDialect
 
-# email配置
+  # email配置
   mail:
     host: smtp.qq.com
     port: 587

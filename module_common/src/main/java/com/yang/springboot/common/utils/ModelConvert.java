@@ -3,7 +3,6 @@ package com.yang.springboot.common.utils;
 import org.springframework.beans.BeanUtils;
 
 /**
- *
  * dto和domain 类型之间转换
  *
  * @author yanghao
@@ -11,10 +10,10 @@ import org.springframework.beans.BeanUtils;
  */
 public class ModelConvert {
 
-    public static <T> T to(Object source, Class<T> target){
+    public static <T> T to(Object source, Class<T> target) {
         T t = null;
         try {
-            if(source != null){
+            if (source != null) {
                 t = target.newInstance();
                 BeanUtils.copyProperties(source, t);
             }
