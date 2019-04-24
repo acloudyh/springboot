@@ -1,0 +1,106 @@
+server:
+  port: 8889
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 6yhn^YHN
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 20
+      connection-timeout: 10000
+      idle-timeout: 300000
+      max-lifetime: 900000
+    # ===============================
+    # = JPA / HIBERNATE
+    # ===============================
+
+    # Use spring.jpa.properties.* for Hibernate native properties (the prefix is
+    # stripped before adding them to the entity manager).
+
+    # Show or not log for each sql query
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: update
+      # Hibernate ddl auto (create, create-drop, update): with "update" the database
+      # schema will be automatically updated accordingly to java entities found in
+      # the project
+      #spring.jpa.hibernate.ddl-auto = update
+
+      # Allows Hibernate to generate SQL optimized for a particular DBMS  MySQL57InnoDBDialect
+      properties:
+        hibernate:
+          dialect: org.hibernate.spatial.dialect.mysql.MySQL5InnoDBSpatialDialect
+
+  # email配置
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 11@qq.com
+    password: 11
+    from: 11@qq.com
+    to: 11@qq.com
+    protocol: smtp
+    default-encoding: utf-8
+    sendPoolSize: 1
+    sendTimeout: 30
+    open: true
+
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML5
+
+
+  redis:
+    host: 127.0.0.1
+    #默认0的数据库
+    database: 0
+    port: 6379
+    password:
+
+    # 连接超时时间(毫秒)
+    timeout: 1000
+    pool:
+      # 连接池最大连接数(使用负值表示没有限制)
+      max-active: 8
+
+      # 连接池中的最大空闲连接
+      max-idle: 8
+
+      # 连接池最大阻塞等待时间(使用负值表示没有限制)
+      max-wait: -1
+
+      # 连接池中的最小空闲连接
+      min-idle: 0
+
+
+  kafka:
+    bootstrap-servers[0]: 127.0.0.1:9092
+
+    producer:
+      retries: 0
+      # 每次批量发送消息的数量
+      batch-size: 16384
+      buffer-memory: 33554432
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 1
+
+    consumer:
+      group-id: springboot-demo-group
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        session.timeout.ms: 15000
