@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
+ * 上层还可以对接信息来源
+ * 还有点懵
+ *
  * @author yanghao
  * @date 2019-04-24 11:12
  */

@@ -84,6 +84,8 @@ spring:
 
   kafka:
     bootstrap-servers[0]: 127.0.0.1:9092
+    template:
+      default-topic: springboot-demo-yang
 
     producer:
       retries: 0
