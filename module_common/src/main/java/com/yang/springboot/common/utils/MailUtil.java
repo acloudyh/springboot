@@ -101,6 +101,7 @@ public class MailUtil {
         private String content;
         private String filePath;
         private InputStream inputStream;
+
         public MailParam(String from, String to, String subject, String content, InputStream inputStream) {
             this.from = from;
             this.to = to;
