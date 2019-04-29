@@ -53,7 +53,7 @@
         <module>module_web</module>
         <module>module_common</module>
         <module>module_api</module>
-
+        <module>module_jt808</module>
     </modules>
 
     <dependencyManagement>

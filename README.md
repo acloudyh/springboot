@@ -3,8 +3,11 @@
 ### 仅记录个人学习过程，不定期更新
 
 
+#### 2019.4.29
+1. jt808协议 [大佬的git](https://github.com/hylexus/jt-808-protocol)
+
 #### 2019.4.24
-1. springboot 整合spring kafka
+1. springboot 整合spring kafka（先暂停）
 
 
 #### 2019.4.22
