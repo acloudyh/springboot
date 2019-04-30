@@ -2,6 +2,7 @@ package com.yang.springboot.common.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -9,8 +10,6 @@ import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -25,8 +24,9 @@ import java.util.Map;
  * @author yanghao
  * @date 2019-04-19 11:51
  */
+@Slf4j
 public class ExcelUtil {
-    private static final Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
+
     //未定义的字段
     public static String NO_DEFINE = "no_define";
     //默认日期格式
@@ -51,7 +51,7 @@ public class ExcelUtil {
             workbook.close();
             workbook.dispose();
         } catch (IOException e) {
-            logger.error("导出excel异常", e);
+            log.error("导出excel异常", e);
         }
     }
 
@@ -88,7 +88,7 @@ public class ExcelUtil {
             outputStream.flush();
             outputStream.close();
         } catch (Exception e) {
-            logger.error("导出Excel操作时操作下载请求出现异常", e);
+            log.error("导出Excel操作时操作下载请求出现异常", e);
         }
     }
 
@@ -105,7 +105,7 @@ public class ExcelUtil {
             baos.close();
             return is;
         } catch (Exception e) {
-            logger.error("导出excel异常", e);
+            log.error("导出excel异常", e);
         }
         return null;
     }
