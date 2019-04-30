@@ -61,11 +61,6 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>4.1.17</version>
-        </dependency>
 
     </dependencies>
     <build>

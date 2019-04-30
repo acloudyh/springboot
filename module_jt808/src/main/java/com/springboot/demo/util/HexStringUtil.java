@@ -65,7 +65,7 @@ public class HexStringUtil {
             if (hv.length() < 2) {
                 stringBuilder.append(0);
             }
-            stringBuilder.append(hv+" ");
+            stringBuilder.append(hv + " ");
         }
         return stringBuilder.toString();
     }

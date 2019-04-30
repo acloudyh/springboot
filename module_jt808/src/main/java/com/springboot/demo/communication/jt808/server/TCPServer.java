@@ -1,6 +1,6 @@
 package com.springboot.demo.communication.jt808.server;
 
-import com.springboot.demo.common.TPMSConstants;
+import com.springboot.demo.communication.jt808.service.codec.Decoder4LoggingOnly;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -39,14 +39,6 @@ public class TCPServer {
         this.port = port;
     }
 
-    public static void main(String[] args) throws Exception {
-        TCPServer server = new TCPServer(20048);
-        server.startServer();
-
-        // Thread.sleep(3000);
-        // server.stopServer();
-    }
-
     private void bind() throws Exception {
         this.bossGroup = new NioEventLoopGroup();
         this.workerGroup = new NioEventLoopGroup();
@@ -56,14 +48,11 @@ public class TCPServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast("idleStateHandler",
-                                new IdleStateHandler(TPMSConstants.tcp_client_idle_minutes, 0, 0, TimeUnit.MINUTES));
-//                        ch.pipeline().addLast(new Decoder4LoggingOnly());
-                        // 1024表示单条消息的最大长度，解码器在查找分隔符的时候，达到该长度还没找到的话会抛异常
-                        ch.pipeline().addLast(
-                                new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer(new byte[]{0x7e}),
-                                        Unpooled.copiedBuffer(new byte[]{0x7e, 0x7e})));
-                        // ch.pipeline().addLast(new PackageDataDecoder());
+                        ch.pipeline().addLast("idleStateHandler", new IdleStateHandler(30, 0, 0, TimeUnit.MINUTES));
+                        ch.pipeline().addLast(new Decoder4LoggingOnly());
+
+                        //1024表示单条消息的最大长度，解码器在查找分隔符的时候，达到该长度还没找到的话会抛异常
+                        ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.copiedBuffer(new byte[]{0x7e}), Unpooled.copiedBuffer(new byte[]{0x7e, 0x7e})));
                         ch.pipeline().addLast(new TCPServerHandler());
                     }
                 }).option(ChannelOption.SO_BACKLOG, 128)
@@ -71,7 +60,6 @@ public class TCPServer {
 
         this.log.info("TCP服务启动完毕,port={}", this.port);
         ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
-
         channelFuture.channel().closeFuture().sync();
     }
 

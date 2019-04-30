@@ -29,7 +29,7 @@ public class TerminalMsgProcessService extends BaseMsgProcessService {
     }
 
     public void processRegisterMsg(TerminalRegisterMsg msg) throws Exception {
-        log.debug("终端注册:{}", JSON.toJSONString(msg, true));
+        log.info("终端注册:{}", JSON.toJSONString(msg, true));
 
         final String sessionId = Session.buildId(msg.getChannel());
         Session session = sessionManager.findBySessionId(sessionId);
@@ -54,7 +54,7 @@ public class TerminalMsgProcessService extends BaseMsgProcessService {
     public void processAuthMsg(TerminalAuthenticationMsg msg) throws Exception {
         // TODO 暂时每次鉴权都成功
 
-        log.debug("终端鉴权:{}", JSON.toJSONString(msg, true));
+        log.info("终端鉴权:{}", JSON.toJSONString(msg, true));
 
         final String sessionId = Session.buildId(msg.getChannel());
         Session session = sessionManager.findBySessionId(sessionId);
@@ -95,7 +95,9 @@ public class TerminalMsgProcessService extends BaseMsgProcessService {
     }
 
     public void processLocationInfoUploadMsg(LocationInfoUploadMsg req) throws Exception {
-        log.debug("位置 信息:{}", JSON.toJSONString(req, true));
+        log.info("位置 信息:{}", JSON.toJSONString(req, true));
+        //TODO
+        //可以做些业务逻辑，位置存库
         final PackageData.MsgHeader reqHeader = req.getMsgHeader();
         ServerCommonRespMsgBody respMsgBody = new ServerCommonRespMsgBody(reqHeader.getFlowId(), reqHeader.getMsgId(),
                 ServerCommonRespMsgBody.success);

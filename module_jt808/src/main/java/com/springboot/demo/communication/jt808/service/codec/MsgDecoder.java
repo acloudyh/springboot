@@ -8,8 +8,6 @@ import com.springboot.demo.communication.jt808.vo.req.TerminalRegisterMsg;
 import com.springboot.demo.util.BCD8421Operater;
 import com.springboot.demo.util.BitOperator;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,8 +21,6 @@ import java.util.Date;
  */
 @Slf4j
 public class MsgDecoder {
-
-    private static final Logger log = LoggerFactory.getLogger(MsgDecoder.class);
 
     private BitOperator bitOperator;
     private BCD8421Operater bcd8421Operater;

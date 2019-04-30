@@ -42,6 +42,7 @@ public class TCPServerHandler extends ChannelInboundHandlerAdapter { // (1)
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws InterruptedException { // (2)
         try {
             ByteBuf buf = (ByteBuf) msg;
+            buf.retain();
             if (buf.readableBytes() <= 0) {
                 ReferenceCountUtil.safeRelease(msg);
                 return;
@@ -153,7 +154,7 @@ public class TCPServerHandler extends ChannelInboundHandlerAdapter { // (1)
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Session session = Session.buildSession(ctx.channel());
         sessionManager.put(session.getId(), session);
-        log.debug("终端连接:{}", session);
+        log.info("终端连接:{}", session);
     }
 
     @Override
@@ -161,7 +162,7 @@ public class TCPServerHandler extends ChannelInboundHandlerAdapter { // (1)
         final String sessionId = ctx.channel().id().asLongText();
         Session session = sessionManager.findBySessionId(sessionId);
         this.sessionManager.removeBySessionId(sessionId);
-        log.debug("终端断开连接:{}", session);
+        log.info("终端断开连接:{}", session);
         ctx.channel().close();
         // ctx.close();
     }
@@ -172,7 +173,7 @@ public class TCPServerHandler extends ChannelInboundHandlerAdapter { // (1)
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.READER_IDLE) {
                 Session session = this.sessionManager.removeBySessionId(Session.buildId(ctx.channel()));
-                log.error("服务器主动断开连接:{}", session);
+                log.info("服务器主动断开连接:{}", session);
                 ctx.close();
             }
         }

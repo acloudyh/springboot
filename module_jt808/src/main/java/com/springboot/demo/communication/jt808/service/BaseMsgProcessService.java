@@ -7,16 +7,14 @@ import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author yanghao
  * @date 2019-04-29 11:22
  */
+@Slf4j
 public class BaseMsgProcessService {
-
-    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     protected SessionManager sessionManager;
 

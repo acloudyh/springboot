@@ -26,7 +26,7 @@ public class PackageData {
     protected int checkSum;
 
     //记录每个客户端的channel,以便下发信息给客户端
-    @JSONField(serialize=false)
+    @JSONField(serialize = false)
     protected Channel channel;
 
     @Override

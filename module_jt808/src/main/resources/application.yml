@@ -1,0 +1,7 @@
+server:
+  port: 8089
+
+
+netty:
+  listen:
+    port: 8888
