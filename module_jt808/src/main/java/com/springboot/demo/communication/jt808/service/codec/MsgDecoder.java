@@ -2,7 +2,6 @@ package com.springboot.demo.communication.jt808.service.codec;
 
 
 import com.springboot.demo.common.TPMSConstants;
-
 import com.springboot.demo.communication.jt808.vo.PackageData;
 import com.springboot.demo.communication.jt808.vo.req.LocationInfoUploadMsg;
 import com.springboot.demo.communication.jt808.vo.req.TerminalRegisterMsg;
@@ -221,10 +220,10 @@ public class MsgDecoder {
         // 3. byte[8-11] 纬度(DWORD(32)) 以度为单位的纬度值乘以10^6，精确到百万分之一度
         // https://github.com/hylexus/jt-808-protocol/issues/8
 //		ret.setLatitude(this.parseFloatFromBytes(data, 8, 4));
-        ret.setLatitude(this.parseIntFromBytes(data, 8, 4)*1.0F/100_0000);
+        ret.setLatitude(this.parseIntFromBytes(data, 8, 4) * 1.0F / 100_0000);
         // 4. byte[12-15] 经度(DWORD(32)) 以度为单位的经度值乘以10^6，精确到百万分之一度
 //		ret.setLongitude(this.parseFloatFromBytes(data, 12, 4));
-        ret.setLongitude(this.parseIntFromBytes(data, 12, 4)*1.0F/100_0000);
+        ret.setLongitude(this.parseIntFromBytes(data, 12, 4) * 1.0F / 100_0000);
         // 5. byte[16-17] 高程(WORD(16)) 海拔高度，单位为米（ m）
         ret.setElevation(this.parseIntFromBytes(data, 16, 2));
         // byte[18-19] 速度(WORD) 1/10km/h
@@ -238,7 +237,7 @@ public class MsgDecoder {
         try {
             date = new SimpleDateFormat("yyMMddHHmmss").parse(dateStr);
         } catch (ParseException e) {
-            log.error("",e);
+            log.error("", e);
         }
         ret.setTime(date);
         return ret;

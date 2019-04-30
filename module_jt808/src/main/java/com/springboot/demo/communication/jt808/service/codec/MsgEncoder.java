@@ -8,7 +8,7 @@ import com.springboot.demo.communication.jt808.vo.req.TerminalRegisterMsg;
 import com.springboot.demo.communication.jt808.vo.resp.ServerCommonRespMsgBody;
 import com.springboot.demo.communication.jt808.vo.resp.TerminalRegisterMsgRespBody;
 import com.springboot.demo.util.BitOperator;
-import com.springboot.demo.util.JT808ProtocolUtils;
+import com.springboot.demo.util.JT808ProtocolUtil;
 
 import java.util.Arrays;
 
@@ -18,11 +18,11 @@ import java.util.Arrays;
  */
 public class MsgEncoder {
     private BitOperator bitOperator;
-    private JT808ProtocolUtils jt808ProtocolUtils;
+    private JT808ProtocolUtil jt808ProtocolUtil;
 
     public MsgEncoder() {
         this.bitOperator = new BitOperator();
-        this.jt808ProtocolUtils = new JT808ProtocolUtils();
+        this.jt808ProtocolUtil = new JT808ProtocolUtil();
     }
 
     public byte[] encode4TerminalRegisterResp(TerminalRegisterMsg req, TerminalRegisterMsgRespBody respMsgBody,
@@ -44,8 +44,8 @@ public class MsgEncoder {
         }
 
         // 消息头
-        int msgBodyProps = this.jt808ProtocolUtils.generateMsgBodyProps(msgBody.length, 0b000, false, 0);
-        byte[] msgHeader = this.jt808ProtocolUtils.generateMsgHeader(req.getMsgHeader().getTerminalPhone(),
+        int msgBodyProps = this.jt808ProtocolUtil.generateMsgBodyProps(msgBody.length, 0b000, false, 0);
+        byte[] msgHeader = this.jt808ProtocolUtil.generateMsgHeader(req.getMsgHeader().getTerminalPhone(),
                 TPMSConstants.cmd_terminal_register_resp, msgBody, msgBodyProps, flowId);
         byte[] headerAndBody = this.bitOperator.concatAll(msgHeader, msgBody);
 
@@ -66,8 +66,8 @@ public class MsgEncoder {
         ));
 
         // 消息头
-        int msgBodyProps = this.jt808ProtocolUtils.generateMsgBodyProps(msgBody.length, 0b000, false, 0);
-        byte[] msgHeader = this.jt808ProtocolUtils.generateMsgHeader(req.getMsgHeader().getTerminalPhone(),
+        int msgBodyProps = this.jt808ProtocolUtil.generateMsgBodyProps(msgBody.length, 0b000, false, 0);
+        byte[] msgHeader = this.jt808ProtocolUtil.generateMsgHeader(req.getMsgHeader().getTerminalPhone(),
                 TPMSConstants.cmd_common_resp, msgBody, msgBodyProps, flowId);
         byte[] headerAndBody = this.bitOperator.concatAll(msgHeader, msgBody);
         // 校验码
@@ -78,8 +78,8 @@ public class MsgEncoder {
 
     public byte[] encode4ParamSetting(byte[] msgBodyBytes, Session session) throws Exception {
         // 消息头
-        int msgBodyProps = this.jt808ProtocolUtils.generateMsgBodyProps(msgBodyBytes.length, 0b000, false, 0);
-        byte[] msgHeader = this.jt808ProtocolUtils.generateMsgHeader(session.getTerminalPhone(),
+        int msgBodyProps = this.jt808ProtocolUtil.generateMsgBodyProps(msgBodyBytes.length, 0b000, false, 0);
+        byte[] msgHeader = this.jt808ProtocolUtil.generateMsgHeader(session.getTerminalPhone(),
                 TPMSConstants.cmd_terminal_param_settings, msgBodyBytes, msgBodyProps, session.currentFlowId());
         // 连接消息头和消息体
         byte[] headerAndBody = this.bitOperator.concatAll(msgHeader, msgBodyBytes);
@@ -97,6 +97,6 @@ public class MsgEncoder {
                 new byte[]{TPMSConstants.pkg_delimiter}// 0x7e
         ));
         // 转义
-        return jt808ProtocolUtils.doEscape4Send(noEscapedBytes, 1, noEscapedBytes.length - 2);
+        return jt808ProtocolUtil.doEscape4Send(noEscapedBytes, 1, noEscapedBytes.length - 2);
     }
 }

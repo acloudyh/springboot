@@ -1,7 +1,6 @@
 package com.springboot.demo.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
 
@@ -16,12 +15,13 @@ import java.io.ByteArrayOutputStream;
  * @author yanghao
  * @date 2019-04-29 11:46
  */
-public class JT808ProtocolUtils {
-    private final Logger log = LoggerFactory.getLogger(getClass());
+@Slf4j
+public class JT808ProtocolUtil {
+
     private BitOperator bitOperator;
     private BCD8421Operater bcd8421Operater;
 
-    public JT808ProtocolUtils() {
+    public JT808ProtocolUtil() {
         this.bitOperator = new BitOperator();
         this.bcd8421Operater = new BCD8421Operater();
     }
