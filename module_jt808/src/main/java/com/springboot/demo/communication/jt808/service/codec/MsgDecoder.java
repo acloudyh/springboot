@@ -55,6 +55,7 @@ public class MsgDecoder {
         // int checkSumInPkg =
         // this.bitOperator.oneByteToInteger(data[data.length - 1]);
         int checkSumInPkg = data[data.length - 1];
+//        int checkSumInPkg = 107;
         int calculatedCheckSum = this.bitOperator.getCheckSum4JT808(data, 0, data.length - 1);
         ret.setCheckSum(checkSumInPkg);
         if (checkSumInPkg != calculatedCheckSum) {
@@ -214,7 +215,6 @@ public class MsgDecoder {
         // 2. byte[4-7] 状态(DWORD(32))
         ret.setStatusField(this.parseIntFromBytes(data, 4, 4));
         // 3. byte[8-11] 纬度(DWORD(32)) 以度为单位的纬度值乘以10^6，精确到百万分之一度
-        // https://github.com/hylexus/jt-808-protocol/issues/8
 //		ret.setLatitude(this.parseFloatFromBytes(data, 8, 4));
         ret.setLatitude(this.parseIntFromBytes(data, 8, 4) * 1.0F / 100_0000);
         // 4. byte[12-15] 经度(DWORD(32)) 以度为单位的经度值乘以10^6，精确到百万分之一度
