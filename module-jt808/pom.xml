@@ -10,8 +10,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>module_jt808</artifactId>
-    <name>module_jt808</name>
+    <artifactId>module-jt808</artifactId>
+    <name>module-jt808</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

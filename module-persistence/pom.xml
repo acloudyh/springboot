@@ -9,8 +9,8 @@
         <artifactId>module</artifactId>
         <version>${module.version}</version>
     </parent>
-    <artifactId>module_persistence</artifactId>
-    <name>module_persistence</name>
+    <artifactId>module-persistence</artifactId>
+    <name>module-persistence</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.springboot</groupId>
-            <artifactId>module_common</artifactId>
+            <artifactId>module-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

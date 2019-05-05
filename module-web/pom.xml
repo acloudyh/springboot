@@ -10,8 +10,8 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>module_api</artifactId>
-    <name>module_api</name>
+    <artifactId>module-web</artifactId>
+    <name>module-web</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.springboot</groupId>
-            <artifactId>module_core</artifactId>
+            <artifactId>module-batch</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

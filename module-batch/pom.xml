@@ -9,8 +9,8 @@
         <artifactId>module</artifactId>
         <version>${module.version}</version>
     </parent>
-    <artifactId>module_batch</artifactId>
-    <name>module_batch</name>
+    <artifactId>module-batch</artifactId>
+    <name>module-batch</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
 
         <dependency>
             <groupId>com.springboot</groupId>
-            <artifactId>module_core</artifactId>
+            <artifactId>module-core</artifactId>
         </dependency>
 
         <dependency>

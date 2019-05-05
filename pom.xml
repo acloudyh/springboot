@@ -47,50 +47,50 @@
     </properties>
 
     <modules>
-        <module>module_core</module>
-        <module>module_persistence</module>
-        <module>module_batch</module>
-        <module>module_web</module>
-        <module>module_common</module>
-        <module>module_api</module>
-        <module>module_jt808</module>
+        <module>module-core</module>
+        <module>module-persistence</module>
+        <module>module-batch</module>
+        <module>module-web</module>
+        <module>module-common</module>
+        <module>module-api</module>
+        <module>module-jt808</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.springboot</groupId>
-                <artifactId>module_common</artifactId>
+                <artifactId>module-common</artifactId>
                 <version>${module.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.springboot</groupId>
-                <artifactId>module_core</artifactId>
+                <artifactId>module-core</artifactId>
                 <version>${module.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.springboot</groupId>
-                <artifactId>module_persistence</artifactId>
+                <artifactId>module-persistence</artifactId>
                 <version>${module.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.springboot</groupId>
-                <artifactId>module_batch</artifactId>
+                <artifactId>module-batch</artifactId>
                 <version>${module.version}</version>
             </dependency>
 
 
             <dependency>
                 <groupId>com.springboot</groupId>
-                <artifactId>module_web</artifactId>
+                <artifactId>module-web</artifactId>
                 <version>${module.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.springboot</groupId>
-                <artifactId>module_api</artifactId>
+                <artifactId>module-api</artifactId>
                 <version>${module.version}</version>
             </dependency>
 
