@@ -2,9 +2,23 @@
 
 ### 仅记录个人学习过程，不定期更新
 
+## 填坑之路
+- [mysql5.7的json类型中文乱码问题](https://www.jianshu.com/p/5bcf37b76d3c)
+- [fasterxml中string字符串转对象json格式单引号错误](https://www.jianshu.com/p/7d6f8926710d)
+
+## 更新记录
+### 2019.5.7
+1. BigDecimalUtil数字运算工具类
+
+> TIPS: mysql涉及到浮点型数据时采用decimal(10,2)，具体精确度视情况而定；此时jpa中对应的字段 (吃过亏)
+```
+@Column(columnDefinition = "decimal(15,3) COMMENT ‘用量'")
+private BigDecimal overCycleDataUsage = BigDecimal.ZERO;
+```
+
 
 #### 2019.4.29
-1. jt808协议 [大佬的git](https://github.com/hylexus/jt-808-protocol)
+1. netty jt808协议 [大佬的github](https://github.com/hylexus/jt-808-protocol)
 
 #### 2019.4.24
 1. springboot 整合spring kafka（先暂停）
