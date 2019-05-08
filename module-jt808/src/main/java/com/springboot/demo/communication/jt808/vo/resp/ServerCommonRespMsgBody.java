@@ -1,9 +1,12 @@
 package com.springboot.demo.communication.jt808.vo.resp;
 
+import lombok.Data;
+
 /**
  * @author yanghao
  * @date 2019-04-29 11:46
  */
+@Data
 public class ServerCommonRespMsgBody {
 
     public static final byte success = 0;
@@ -33,30 +36,6 @@ public class ServerCommonRespMsgBody {
         this.replyFlowId = replyFlowId;
         this.replyId = replyId;
         this.replyCode = replyCode;
-    }
-
-    public int getReplyFlowId() {
-        return replyFlowId;
-    }
-
-    public void setReplyFlowId(int flowId) {
-        this.replyFlowId = flowId;
-    }
-
-    public int getReplyId() {
-        return replyId;
-    }
-
-    public void setReplyId(int msgId) {
-        this.replyId = msgId;
-    }
-
-    public byte getReplyCode() {
-        return replyCode;
-    }
-
-    public void setReplyCode(byte code) {
-        this.replyCode = code;
     }
 
     @Override

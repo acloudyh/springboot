@@ -1,10 +1,13 @@
 package com.springboot.demo.communication.jt808.vo.resp;
 
 
+import lombok.Data;
+
 /**
  * @author yanghao
  * @date 2019-04-29 11:21
  */
+@Data
 public class TerminalRegisterMsgRespBody {
 
     public static final byte success = 0;
@@ -25,30 +28,6 @@ public class TerminalRegisterMsgRespBody {
     private String replyToken;
 
     public TerminalRegisterMsgRespBody() {
-    }
-
-    public int getReplyFlowId() {
-        return replyFlowId;
-    }
-
-    public void setReplyFlowId(int flowId) {
-        this.replyFlowId = flowId;
-    }
-
-    public byte getReplyCode() {
-        return replyCode;
-    }
-
-    public void setReplyCode(byte code) {
-        this.replyCode = code;
-    }
-
-    public String getReplyToken() {
-        return replyToken;
-    }
-
-    public void setReplyToken(String token) {
-        this.replyToken = token;
     }
 
     @Override

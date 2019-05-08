@@ -2,6 +2,7 @@ package com.springboot.demo.communication.jt808.vo.req;
 
 
 import com.springboot.demo.communication.jt808.vo.PackageData;
+import lombok.Data;
 
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author yanghao
  * @date 2019-04-29 11:46
  */
+@Data
 public class LocationInfoUploadMsg extends PackageData {
     // 告警信息
     // byte[0-3]
@@ -42,70 +44,6 @@ public class LocationInfoUploadMsg extends PackageData {
         this.checkSum = packageData.getCheckSum();
         this.msgBodyBytes = packageData.getMsgBodyBytes();
         this.msgHeader = packageData.getMsgHeader();
-    }
-
-    public float getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(float latitude) {
-        this.latitude = latitude;
-    }
-
-    public float getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(float longitude) {
-        this.longitude = longitude;
-    }
-
-    public int getElevation() {
-        return elevation;
-    }
-
-    public void setElevation(int elevation) {
-        this.elevation = elevation;
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public int getWarningFlagField() {
-        return warningFlagField;
-    }
-
-    public void setWarningFlagField(int warningFlagField) {
-        this.warningFlagField = warningFlagField;
-    }
-
-    public int getStatusField() {
-        return statusField;
-    }
-
-    public void setStatusField(int statusField) {
-        this.statusField = statusField;
     }
 
     @Override

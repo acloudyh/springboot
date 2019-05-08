@@ -3,6 +3,7 @@ package com.springboot.demo.communication.jt808.vo.req;
 
 import com.springboot.demo.common.TPMSConstants;
 import com.springboot.demo.communication.jt808.vo.PackageData;
+import lombok.Data;
 
 import java.util.Arrays;
 
@@ -12,6 +13,7 @@ import java.util.Arrays;
  * @author yanghao
  * @date 2019-04-29 11:46
  */
+@Data
 public class TerminalAuthenticationMsg extends PackageData {
     private String authCode;
 
@@ -25,14 +27,6 @@ public class TerminalAuthenticationMsg extends PackageData {
         this.msgBodyBytes = packageData.getMsgBodyBytes();
         this.msgHeader = packageData.getMsgHeader();
         this.authCode = new String(packageData.getMsgBodyBytes(), TPMSConstants.string_charset);
-    }
-
-    public String getAuthCode() {
-        return authCode;
-    }
-
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
     }
 
     @Override

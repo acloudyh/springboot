@@ -2,6 +2,7 @@ package com.springboot.demo.communication.jt808.vo.req;
 
 
 import com.springboot.demo.communication.jt808.vo.PackageData;
+import lombok.Data;
 
 import java.util.Arrays;
 
@@ -11,6 +12,7 @@ import java.util.Arrays;
  * @author yanghao
  * @date 2019-04-29 11:46
  */
+@Data
 public class TerminalRegisterMsg extends PackageData {
 
     private TerminalRegInfo terminalRegInfo;
@@ -26,14 +28,6 @@ public class TerminalRegisterMsg extends PackageData {
         this.msgHeader = packageData.getMsgHeader();
     }
 
-    public TerminalRegInfo getTerminalRegInfo() {
-        return terminalRegInfo;
-    }
-
-    public void setTerminalRegInfo(TerminalRegInfo msgBody) {
-        this.terminalRegInfo = msgBody;
-    }
-
     @Override
     public String toString() {
         return "TerminalRegisterMsg [terminalRegInfo=" + terminalRegInfo + ", msgHeader=" + msgHeader
@@ -41,6 +35,7 @@ public class TerminalRegisterMsg extends PackageData {
                 + "]";
     }
 
+    @Data
     public static class TerminalRegInfo {
         // 省域ID(WORD),设备安装车辆所在的省域，省域ID采用GB/T2260中规定的行政区划代码6位中前两位
         // 0保留，由平台取默认值
@@ -68,62 +63,6 @@ public class TerminalRegisterMsg extends PackageData {
         private String licensePlate;
 
         public TerminalRegInfo() {
-        }
-
-        public int getProvinceId() {
-            return provinceId;
-        }
-
-        public void setProvinceId(int provinceId) {
-            this.provinceId = provinceId;
-        }
-
-        public int getCityId() {
-            return cityId;
-        }
-
-        public void setCityId(int cityId) {
-            this.cityId = cityId;
-        }
-
-        public String getManufacturerId() {
-            return manufacturerId;
-        }
-
-        public void setManufacturerId(String manufacturerId) {
-            this.manufacturerId = manufacturerId;
-        }
-
-        public String getTerminalType() {
-            return terminalType;
-        }
-
-        public void setTerminalType(String terminalType) {
-            this.terminalType = terminalType;
-        }
-
-        public String getTerminalId() {
-            return terminalId;
-        }
-
-        public void setTerminalId(String terminalId) {
-            this.terminalId = terminalId;
-        }
-
-        public int getLicensePlateColor() {
-            return licensePlateColor;
-        }
-
-        public void setLicensePlateColor(int licensePlate) {
-            this.licensePlateColor = licensePlate;
-        }
-
-        public String getLicensePlate() {
-            return licensePlate;
-        }
-
-        public void setLicensePlate(String licensePlate) {
-            this.licensePlate = licensePlate;
         }
 
         @Override
