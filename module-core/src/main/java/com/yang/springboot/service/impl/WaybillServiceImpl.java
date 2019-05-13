@@ -142,12 +142,7 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     @Override
     public void exportWaybill(WaybillDto dto, HttpServletResponse response) throws IOException {
 
-        List<Waybill> waybills = waybillRepo.findAll((root, query, cb) -> {
-            List<Predicate> predicates = getWaybillPredicates(dto, root, cb);
-            return cb.and(predicates.stream().toArray(Predicate[]::new));
-        });
-
-        List waybillDtos = waybills.stream().map(x -> toDto(x, WaybillDto.class)).collect(Collectors.toList());
+        List waybillDtos = getExportData(dto);
 
 
         if (CollectionUtils.isNotEmpty(waybillDtos)) {
@@ -161,6 +156,7 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
             headMap.put("createdTime", "创建时间");
             headMap.put("carrierEmail", "推送邮箱");
 
+            //超过限制数量后台下载以附件形式发送邮件到账户邮箱内
             if (count < ExportConstants.MID_LIMIT) {
                 ExcelUtil.downloadExcelFile(title, headMap, jsonArray, response);
             } else {
@@ -179,6 +175,22 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
                 out.flush();
             }
         }
+    }
+
+    @Override
+    public void exportWaybillByAlibaba(WaybillDto dto, HttpServletResponse response) throws IOException {
+        List waybillDtos = getExportData(dto);
+        EasyExcelUtil.export(waybillDtos, response, WaybillDto.class);
+    }
+
+
+    private List getExportData(WaybillDto dto) {
+        List<Waybill> waybills = waybillRepo.findAll((root, query, cb) -> {
+            List<Predicate> predicates = getWaybillPredicates(dto, root, cb);
+            return cb.and(predicates.stream().toArray(Predicate[]::new));
+        });
+
+        return waybills.stream().map(x -> toDto(x, WaybillDto.class)).collect(Collectors.toList());
     }
 
 

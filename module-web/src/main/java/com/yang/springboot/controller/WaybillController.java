@@ -83,8 +83,9 @@ public class WaybillController {
     public void createBatchWaybill() {
         long startTime = System.currentTimeMillis();
         List<Waybill> waybills = new ArrayList<>();
+        int num = 80000;
 
-        for (int i = 0; i < 80000; i++) {
+        for (int i = 0; i < num; i++) {
             Waybill waybill = new Waybill();
             waybill.setBillCode("wb" + i);
             waybill.setCarrierEmail(i + "@qq.com");
@@ -96,17 +97,27 @@ public class WaybillController {
         waybillService.createBatchWaybill(waybills);
 
         long endTime = System.currentTimeMillis();
-        log.info("插入5万条数据耗时:{} ms", endTime - startTime);
+        log.info("插入{}条数据耗时:{} ms", num, endTime - startTime);
     }
 
     @RequestMapping(value = "/export", method = RequestMethod.GET)
-    public void exportStudents(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
+    public void exportWaybills(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
         long startTime = System.currentTimeMillis();
         WaybillDto dto = new WaybillDto();
         BeanUtils.copyProperties(request, dto);
         waybillService.exportWaybill(dto, response);
         long endTime = System.currentTimeMillis();
-        log.info("导出5万条数据耗时:{} ms", endTime - startTime);
+        log.info("导出条数据耗时:{} ms", endTime - startTime);
+    }
+
+    @RequestMapping(value = "/export/alibaba", method = RequestMethod.GET)
+    public void exportWaybillsByAlibaba(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
+        long startTime = System.currentTimeMillis();
+        WaybillDto dto = new WaybillDto();
+        BeanUtils.copyProperties(request, dto);
+        waybillService.exportWaybillByAlibaba(dto, response);
+        long endTime = System.currentTimeMillis();
+        log.info("导出数据耗时:{} ms", endTime - startTime);
     }
 
 

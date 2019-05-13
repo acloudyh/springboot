@@ -8,9 +8,10 @@ server:
 # Set here configurations for the database connection
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.DriverSpy
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:log4jdbc:mysql://localhost:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: 6yhn^YHN
     hikari:
@@ -30,7 +31,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     # Hibernate ddl auto (create, create-drop, update): with "update" the database
     # schema will be automatically updated accordingly to java entities found in
     # the project

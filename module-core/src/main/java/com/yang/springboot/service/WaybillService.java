@@ -75,5 +75,15 @@ public interface WaybillService {
      */
     void exportWaybill(WaybillDto dto, HttpServletResponse response) throws IOException;
 
+    /**
+     * 导出运单
+     * alibaba 开源项目
+     *
+     * @param dto
+     * @param response
+     * @throws IOException
+     */
+    void exportWaybillByAlibaba(WaybillDto dto, HttpServletResponse response) throws IOException;
+
 
 }
