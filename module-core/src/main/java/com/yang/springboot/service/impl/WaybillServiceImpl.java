@@ -181,6 +181,7 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     public void exportWaybillByAlibaba(WaybillDto dto, HttpServletResponse response) throws IOException {
         List waybillDtos = getExportData(dto);
         EasyExcelUtil.export(waybillDtos, response, WaybillDto.class);
+//        EasyExcelUtil.exportNoModel(waybillDtos, response, WaybillDto.class);
     }
 
 

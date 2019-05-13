@@ -27,7 +27,7 @@ public class WaybillDto extends BaseRowModel implements Serializable {
     private String billCode;
 
     @ApiModelProperty(value = "创建时间")
-    @ExcelProperty(value = "创建时间", index = 1)
+    @ExcelProperty(value = "创建时间", index = 1, format = "yyyy-MM-dd-HH-mm-ss")
     private Date createdTime;
 
     @ApiModelProperty(value = "承运人姓名")
