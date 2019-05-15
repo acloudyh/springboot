@@ -31,7 +31,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     # Hibernate ddl auto (create, create-drop, update): with "update" the database
     # schema will be automatically updated accordingly to java entities found in
     # the project
@@ -68,7 +68,7 @@ spring:
   redis:
     host: 127.0.0.1
     #默认0的数据库
-    database: 0
+    database: 1
     port: 6379
     password:
 
@@ -90,3 +90,7 @@ spring:
   #banner
   main:
     show-banner: true
+security:
+  oauth2:
+    resource:
+      filter-order: 3
