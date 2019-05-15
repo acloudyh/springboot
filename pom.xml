@@ -15,7 +15,7 @@
     </parent>
 
     <properties>
-        <module.version>1.0.0-SNAPSHOT</module.version>
+        <module.version>1.0-SNAPSHOT</module.version>
 
         <maven.test.skip>true</maven.test.skip>
         <java.version>1.8</java.version>
@@ -57,6 +57,7 @@
         <module>module-common</module>
         <module>module-api</module>
         <module>module-jt808</module>
+        <module>module-modbus</module>
     </modules>
 
     <dependencyManagement>
