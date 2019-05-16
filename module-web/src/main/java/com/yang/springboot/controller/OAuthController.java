@@ -1,10 +1,11 @@
 package com.yang.springboot.controller;
 
-import io.swagger.annotations.Api;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+        import io.swagger.annotations.Api;
+        import lombok.extern.slf4j.Slf4j;
+        import org.springframework.web.bind.annotation.GetMapping;
+        import org.springframework.web.bind.annotation.PathVariable;
+        import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author yanghao
@@ -12,13 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
+@RequestMapping(value = "/web/oauth2")
 @Api(tags = "测试用", description = "测试用")
 public class OAuthController {
-
-    @GetMapping("/product/{id}")
-    public String getProduct(@PathVariable String id) {
-        return "product id : " + id;
-    }
 
     @GetMapping("/order/{id}")
     public String getOrder(@PathVariable String id) {

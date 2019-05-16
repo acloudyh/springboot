@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 @Configuration
 public class OAuth2Config {
 
-    private static final String DEMO_RESOURCE_ID = "ggg";
+    private static final String DEMO_RESOURCE_ID = "/web";
 
 
     @Configuration
@@ -47,13 +47,13 @@ public class OAuth2Config {
                     .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-//                    .and()
-//                    .requestMatchers().anyRequest()
                     .and()
                     .anonymous()
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/web/neo/**").authenticated();
+                    .antMatchers("/web/neo/**").permitAll()
+                    .anyRequest().authenticated();
+
         }
     }
 
