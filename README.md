@@ -16,13 +16,17 @@
 #### 2019.5.13
 1. 阿里easyexcel 利用注解model导出文件
 2. 无注解动态导出
-> TIPS: 2018年12月之后没有提交代码。issue也没有更新。怀疑停止维护（不太建议使用）
+
+TIPS: 
+> 2018年12月之后没有提交代码。issue也没有更新。怀疑停止维护（不太建议使用）
 > 另外，对大数据量 poi 不会自动生成多个sheet；但是，poi大数据量会出现oom
 
 
 #### 2019.5.7
 1. BigDecimalUtil数字运算工具类
-> TIPS: mysql涉及到浮点型数据时采用decimal(10,2)，具体精确度视情况而定；此时jpa中对应的字段 (吃过亏)
+
+TIPS:
+ > mysql涉及到浮点型数据时采用decimal(10,2)，具体精确度视情况而定；此时jpa中对应的字段 (吃过亏)
 ```
 @Column(columnDefinition = "decimal(15,3) COMMENT ‘用量'")
 private BigDecimal overCycleDataUsage = BigDecimal.ZERO;
