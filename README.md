@@ -46,12 +46,12 @@ private BigDecimal overCycleDataUsage = BigDecimal.ZERO;
 1. 导出文件工具类ExcelUtil
 2. 时间转换工具类DateUtil
 3. 邮件模板thymeleaf调用
-4. 导出数量过大，后台导出以附件的形式发送到邮箱
+4. Java POI 导出excel文件，若导出数量过大，后台导出以附件的形式发送到邮箱
 
 #### 2019.4.18
 1. 多模块项目初始化
-2. jpa简单增删改查及分页查询
-3. 导出数据web导出，数量不多情况下
+2. swagger2 使用
+3. jpa简单增删改查及分页查询
 
 
 
