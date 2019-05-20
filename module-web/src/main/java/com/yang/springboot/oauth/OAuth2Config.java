@@ -52,6 +52,10 @@ public class OAuth2Config {
                     .and()
                     .authorizeRequests()
                     .antMatchers("/web/neo/**").permitAll()
+                    .antMatchers("/swagger-resources/**").permitAll()
+                    .antMatchers("/webjars/springfox-swagger-ui/**").permitAll()
+                    .antMatchers("/swagger-ui.html").permitAll()
+                    .antMatchers("/v2/api-docs/**").permitAll()
                     .anyRequest().authenticated();
 
         }

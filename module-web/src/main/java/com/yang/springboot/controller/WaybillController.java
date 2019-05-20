@@ -39,7 +39,7 @@ public class WaybillController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiOperation("创建运单")
+    @ApiOperation(value = "创建运单", notes = "创建相关运单")
     public WaybillDto createWaybill(@RequestBody @Valid WaybillCreateRequest request) {
         WaybillDto dto = new WaybillDto();
         BeanUtils.copyProperties(request, dto);
@@ -47,7 +47,7 @@ public class WaybillController {
     }
 
     @RequestMapping(value = "/{billCode}", method = RequestMethod.DELETE)
-    @ApiOperation("删除运单")
+    @ApiOperation(value = "删除运单", notes = "删除相关运单")
     public void deleteWaybill(@PathVariable String billCode) {
         waybillService.deleteWaybillByBillCode(billCode);
     }
@@ -101,6 +101,7 @@ public class WaybillController {
     }
 
     @RequestMapping(value = "/export", method = RequestMethod.GET)
+    @ApiOperation("Java POI 导出excel文件")
     public void exportWaybills(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
         long startTime = System.currentTimeMillis();
         WaybillDto dto = new WaybillDto();
@@ -111,6 +112,7 @@ public class WaybillController {
     }
 
     @RequestMapping(value = "/export/alibaba", method = RequestMethod.GET)
+    @ApiOperation("阿里easyexcel 导出excel文件")
     public void exportWaybillsByAlibaba(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
         long startTime = System.currentTimeMillis();
         WaybillDto dto = new WaybillDto();
