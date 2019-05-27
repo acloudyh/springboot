@@ -30,17 +30,17 @@ spring:
   # Show or not log for each sql query
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: none
+
     # Hibernate ddl auto (create, create-drop, update): with "update" the database
     # schema will be automatically updated accordingly to java entities found in
     # the project
-    #spring.jpa.hibernate.ddl-auto = update
-
+    hibernate:
+      ddl-auto: none
     # Allows Hibernate to generate SQL optimized for a particular DBMS  MySQL57InnoDBDialect
     properties:
       hibernate:
         dialect: org.hibernate.spatial.dialect.mysql.MySQL5InnoDBSpatialDialect
+
 
   # email配置
   mail:
@@ -90,6 +90,9 @@ spring:
   #banner
   main:
     show-banner: true
+#  data:
+#    mongodb:
+#      host: 127.0.0.1:27017
 security:
   oauth2:
     resource:

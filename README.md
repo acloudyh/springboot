@@ -1,6 +1,6 @@
 ## springboot 学习demo
 
-### 仅记录个人学习过程，不定期更新
+### 仅记录个人学习过程，以及踩坑，不定期更新
 
 ## 填坑之路
 - [mysql5.7的json类型中文乱码问题](https://www.jianshu.com/p/5bcf37b76d3c)
@@ -10,6 +10,11 @@
 
 #### 2019.5.15
 1. oauth2.0实现鉴权（客户端和密码模式）
+```
+http://localhost:8888/oauth/token?username=user_1&password=123456&grant_type=password&scope=select&client_id=client_2&client_secret=123456
+
+http://localhost:8888/oauth/token?grant_type=client_credentials&scope=select&client_id=client_1&client_secret=123456
+```
 2. token 存放redis，性能好点而且有自动过期机制
 3. UserDetailsService 示例放在内存中，实际项目数据库保存
 
