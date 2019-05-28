@@ -13,9 +13,9 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-<!--    <root level="DEBUG">-->
-<!--        <appender-ref ref="CONSOLE"/>-->
-<!--    </root>-->
+    <!--    <root level="DEBUG">-->
+    <!--        <appender-ref ref="CONSOLE"/>-->
+    <!--    </root>-->
 
     <logger name="org.springframework.web.servlet.mvc.method.annotation" level="error"/>
     <logger name="jdbc.sqltiming" level="INFO"/>
