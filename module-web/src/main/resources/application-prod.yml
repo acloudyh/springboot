@@ -41,6 +41,10 @@ spring:
       hibernate:
         dialect: org.hibernate.spatial.dialect.mysql.MySQL5InnoDBSpatialDialect
 
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/springboot-demo
+
 
   # email配置
   mail:
@@ -90,9 +94,7 @@ spring:
   #banner
   main:
     show-banner: true
-#  data:
-#    mongodb:
-#      host: 127.0.0.1:27017
+
 security:
   oauth2:
     resource:
