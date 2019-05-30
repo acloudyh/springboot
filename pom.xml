@@ -15,7 +15,7 @@
     </parent>
 
     <properties>
-        <module.version>1.0-RELEASE</module.version>
+        <module.version>1.0-SNAPSHOT</module.version>
 
         <maven.test.skip>true</maven.test.skip>
         <java.version>1.8</java.version>
