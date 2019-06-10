@@ -32,7 +32,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping(value = "/web/neo/waybill")
-@Api(tags = "运单管理", description = "运单管理")
+@Api(tags = "运单管理")
 public class WaybillController {
     @Resource
     private WaybillService waybillService;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping(value = "/web/oauth2")
-@Api(tags = "测试用", description = "测试用")
+@Api(tags = "测试用")
 public class OAuthController {
 
     @GetMapping("/order/{id}")

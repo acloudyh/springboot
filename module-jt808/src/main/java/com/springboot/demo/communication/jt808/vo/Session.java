@@ -21,7 +21,7 @@ public class Session {
     // 客户端上次的连接时间，该值改变的情况:
     // 1. terminal --> server 心跳包
     // 2. terminal --> server 数据包
-    private long lastCommunicateTimeStamp = 0l;
+    private long lastCommunicateTimeStamp = 0L;
 
     public Session() {
     }
