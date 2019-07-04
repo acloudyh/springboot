@@ -45,8 +45,6 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/springboot-demo
 
-
-
   # email配置
   mail:
     host: smtp.qq.com
