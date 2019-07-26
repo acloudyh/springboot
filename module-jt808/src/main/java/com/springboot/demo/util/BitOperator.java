@@ -11,6 +11,76 @@ import java.util.List;
  */
 public class BitOperator {
 
+
+    private static String hexStr = "0123456789ABCDEF";
+    private static String[] binaryArray =
+            {
+                    "0000", "0001", "0010", "0011",
+                    "0100", "0101", "0110", "0111",
+                    "1000", "1001", "1010", "1011",
+                    "1100", "1101", "1110", "1111"
+            };
+
+
+    /**
+     * byte[]字节数组转换为二进制字符串
+     * 便于取位
+     *
+     * @param bArray
+     * @return
+     */
+    public static String bytes2BinaryStr(byte[] bArray) {
+
+        String outStr = "";
+        int pos = 0;
+        for (byte b : bArray) {
+            //高四位
+            pos = (b & 0xF0) >> 4;
+            outStr += binaryArray[pos];
+            //低四位
+            pos = b & 0x0F;
+            outStr += binaryArray[pos];
+        }
+        return outStr;
+
+    }
+
+    /**
+     * 获取字节中的第n位
+     * 右移n位，与1
+     *
+     * @param value
+     * @param index
+     * @return
+     */
+    public static int get(byte value, int index) {
+        return (value >> index) & 0x1;
+    }
+
+
+    /**
+     * 把byte[]转化位整形 int
+     *
+     * @param value
+     * @return
+     * @throws Exception
+     */
+    public int byteToInteger(byte[] value) {
+        int result;
+        if (value.length == 1) {
+            result = oneByteToInteger(value[0]);
+        } else if (value.length == 2) {
+            result = twoBytesToInteger(value);
+        } else if (value.length == 3) {
+            result = threeBytesToInteger(value);
+        } else if (value.length == 4) {
+            result = fourBytesToInteger(value);
+        } else {
+            result = fourBytesToInteger(value);
+        }
+        return result;
+    }
+
     /**
      * 把一个整形该为byte
      *
@@ -80,28 +150,6 @@ public class BitOperator {
         return result;
     }
 
-    /**
-     * 把byte[]转化位整形,通常为指令用
-     *
-     * @param value
-     * @return
-     * @throws Exception
-     */
-    public int byteToInteger(byte[] value) {
-        int result;
-        if (value.length == 1) {
-            result = oneByteToInteger(value[0]);
-        } else if (value.length == 2) {
-            result = twoBytesToInteger(value);
-        } else if (value.length == 3) {
-            result = threeBytesToInteger(value);
-        } else if (value.length == 4) {
-            result = fourBytesToInteger(value);
-        } else {
-            result = fourBytesToInteger(value);
-        }
-        return result;
-    }
 
     /**
      * 把一个byte转化位整形,通常为指令用

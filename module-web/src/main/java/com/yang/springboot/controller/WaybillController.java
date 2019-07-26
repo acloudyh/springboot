@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,7 +30,7 @@ import java.util.List;
  * @author yanghao
  * @date 2019-04-18 16:50
  */
-@RestController
+@Controller
 @Slf4j
 @RequestMapping(value = "/web/neo/waybill")
 @Api(tags = "运单管理")
@@ -45,6 +46,13 @@ public class WaybillController {
         BeanUtils.copyProperties(request, dto);
         return waybillService.createWaybill(dto);
     }
+
+
+    @RequestMapping(value = "hello", method = RequestMethod.GET)
+    public String createWaybill() {
+        return "hello";
+    }
+
 
     @RequestMapping(value = "/{billCode}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除运单", notes = "删除相关运单")
