@@ -31,6 +31,7 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <commons-net.version>3.6</commons-net.version>
         <commons-io.version>2.5</commons-io.version>
+        <netty.version>4.1.42.Final</netty.version>
         <joda-time.version>2.9.4</joda-time.version>
         <quartz-scheduler.version>2.2.3</quartz-scheduler.version>
         <httpclient.version>4.5.2</httpclient.version>
@@ -57,6 +58,7 @@
         <module>module-api</module>
         <module>module-jt808</module>
         <module>module-modbus</module>
+        <module>module-netty</module>
     </modules>
 
     <dependencyManagement>
@@ -85,7 +87,11 @@
                 <version>${module.version}</version>
             </dependency>
 
-
+            <dependency>
+                <groupId>com.springboot</groupId>
+                <artifactId>module-netty</artifactId>
+                <version>${module.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.springboot</groupId>
                 <artifactId>module-web</artifactId>
@@ -231,7 +237,11 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-messaging</artifactId>
             </dependency>
-
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
 
             <!-- spring-kafka -->
             <dependency>
