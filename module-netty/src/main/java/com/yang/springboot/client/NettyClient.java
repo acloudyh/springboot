@@ -7,7 +7,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Netty 客户端将会：
@@ -20,7 +19,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2019/11/1 12:00
  */
 @Slf4j
-@Configuration
 public class NettyClient {
     private static final String HOST = "127.0.0.1";
     private static final int PORT = 8999;

@@ -40,13 +40,14 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         //向客户端写入数据
         String str = "内容：服务端---->客户端";
         log.info("这里是服务端，开始发送数据给客户端：{}", str);
-        byte[] bytes = str.getBytes(CharsetUtil.UTF_8);
-
-        //获取二进制抽象 ByteBuf
-        ByteBuf out = ctx.alloc().buffer();
-
-        //填充数据到 ByteBuf
-        out.writeBytes(bytes);
+        ByteBuf out = Unpooled.copiedBuffer(str, CharsetUtil.UTF_8);
+//        byte[] bytes = str.getBytes(CharsetUtil.UTF_8);
+//
+//        //获取二进制抽象 ByteBuf
+//        ByteBuf out = ctx.alloc().buffer();
+//
+//        //填充数据到 ByteBuf
+//        out.writeBytes(bytes);
 
         //开始写数据
         ctx.channel().writeAndFlush(out);

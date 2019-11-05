@@ -7,14 +7,12 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author yanghao
  * @date 2019/10/31 18:04
  */
 @Slf4j
-@Configuration
 public class NettyServer {
     private static final int PORT = 8999;
 
@@ -34,7 +32,7 @@ public class NettyServer {
                     }
                 });
         //异步绑定服务器，调用sync()方法阻塞等待直到绑定完成
-        log.info(" 707TCP服务启动完毕,port={}", PORT);
+        log.info("netty 服务启动完毕,port={}", PORT);
         ChannelFuture channelFuture = serverBootstrap.bind(PORT).sync();
 //        ChannelFuture channelFuture = serverBootstrap.bind(PORT).addListener(future -> {
 //            if (future.isSuccess()) {
