@@ -79,4 +79,26 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         cause.printStackTrace();
         ctx.close();
     }
+
+    /**
+     * 开始连接 处理业务逻辑
+     *
+     * @param ctx
+     * @throws Exception
+     */
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        log.info("客户端开始连接￿。。。TODO");
+    }
+
+    /**
+     * 断开连接 处理业务逻辑
+     *
+     * @param ctx
+     * @throws Exception
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        log.info("客户端断开连接。。。TODO");
+    }
 }
