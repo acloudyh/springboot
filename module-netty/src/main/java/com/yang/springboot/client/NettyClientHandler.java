@@ -9,6 +9,8 @@ import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * 后期客户端可以用 网络调试助手 模拟报文的发送
+ *
  * @author yanghao
  * @date 2019/11/1 12:01
  */

@@ -92,7 +92,7 @@ spring:
 
   #banner
   main:
-    show-banner: true
+    show-banner: false
 
 security:
   oauth2:
