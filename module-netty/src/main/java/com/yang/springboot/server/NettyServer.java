@@ -30,22 +30,29 @@ public class NettyServer {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         socketChannel.pipeline().addLast(new NettyServerHandler());
+//                        // inBound，处理读数据的逻辑链
+//                        socketChannel.pipeline().addLast(new TestInboundHandlerA());
+//                        socketChannel.pipeline().addLast(new TestInboundHandlerB());
+//                        socketChannel.pipeline().addLast(new TestInboundHandlerC());
+//
+//                        // outBound，处理写数据的逻辑链
+//                        socketChannel.pipeline().addLast(new TestOutboundHandlerA());
+//                        socketChannel.pipeline().addLast(new TestOutboundHandlerB());
+//                        socketChannel.pipeline().addLast(new TestOutboundHandlerC());
                     }
                 });
         //异步绑定服务器，调用sync()方法阻塞等待直到绑定完成
-        log.info("netty 服务启动完毕,port={}", PORT);
-        ChannelFuture channelFuture = serverBootstrap.bind(PORT).sync();
-//        ChannelFuture channelFuture = serverBootstrap.bind(PORT).addListener(future -> {
-//            if (future.isSuccess()) {
-//                log.info("绑定端口成功：{}",PORT);
-//            } else {
-//                log.info("绑定端口成功：{}",PORT);
-//            }
-//        });
+//        ChannelFuture channelFuture = serverBootstrap.bind(PORT).sync();
+        ChannelFuture channelFuture = serverBootstrap.bind(PORT).addListener(future -> {
+            if (future.isSuccess()) {
+                log.info("netty 服务启动完毕，绑定端口成功：{}", PORT);
+            } else {
+                log.info("netty 服务启动失败，绑定端口失败：{}", PORT);
+            }
+        });
 
         //获取Channel 的closeFuture，并且阻塞当前线程直到完成
         channelFuture.channel().closeFuture().sync();
-        log.info("NettyServer服务启动成功");
 
     }
 
