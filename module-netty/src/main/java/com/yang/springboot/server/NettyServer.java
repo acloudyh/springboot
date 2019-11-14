@@ -1,5 +1,6 @@
 package com.yang.springboot.server;
 
+import com.yang.springboot.server.test.TestChannelLifeCycleHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -39,6 +40,9 @@ public class NettyServer {
 //                        socketChannel.pipeline().addLast(new TestOutboundHandlerA());
 //                        socketChannel.pipeline().addLast(new TestOutboundHandlerB());
 //                        socketChannel.pipeline().addLast(new TestOutboundHandlerC());
+
+                        // channelHandler 生命周期测试
+//                        socketChannel.pipeline().addLast(new TestChannelLifeCycleHandler());
                     }
                 });
         //异步绑定服务器，调用sync()方法阻塞等待直到绑定完成

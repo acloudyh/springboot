@@ -41,30 +41,9 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         String str = "内容：服务端---->客户端";
         log.info("这里是服务端，开始发送数据给客户端：{}", str);
         ByteBuf out = Unpooled.copiedBuffer(str, CharsetUtil.UTF_8);
-//        byte[] bytes = str.getBytes(CharsetUtil.UTF_8);
-//
-//        //获取二进制抽象 ByteBuf
-//        ByteBuf out = ctx.alloc().buffer();
-//
-//        //填充数据到 ByteBuf
-//        out.writeBytes(bytes);
 
         //开始写数据
         ctx.channel().writeAndFlush(out);
-    }
-
-
-    /**
-     * 通知 ChannelInboundHandler最后一次对 channelRead()的调用是当前批量读取中的最后一条消息
-     *
-     * @param ctx
-     * @throws Exception
-     */
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        //将未解决的消息丢到远程节点，关闭channel
-        log.info("channelReadComplete ==========>");
-        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
     }
 
     /**
@@ -88,7 +67,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        log.info("客户端开始连接￿。。。TODO");
+        log.info("客户端开始连接￿。。。TODO 业务逻辑");
     }
 
     /**
@@ -99,6 +78,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        log.info("客户端断开连接。。。TODO");
+        log.info("客户端断开连接。。。TODO 业务逻辑");
     }
 }
