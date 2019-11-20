@@ -47,24 +47,25 @@ public class Application {
                         "Config Server: \t{}\n----------------------------------------------------------",
                 configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
     }
-    private static String getHostIp(){
-        try{
+
+    private static String getHostIp() {
+        try {
             Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
-            while (allNetInterfaces.hasMoreElements()){
-                NetworkInterface netInterface =  allNetInterfaces.nextElement();
+            while (allNetInterfaces.hasMoreElements()) {
+                NetworkInterface netInterface = allNetInterfaces.nextElement();
                 Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
-                while (addresses.hasMoreElements()){
-                    InetAddress ip =  addresses.nextElement();
+                while (addresses.hasMoreElements()) {
+                    InetAddress ip = addresses.nextElement();
                     if (ip != null
                             && ip instanceof Inet4Address
                             && !ip.isLoopbackAddress() //loopback地址即本机地址，IPv4的loopback范围是127.0.0.0 ~ 127.255.255.255
-                            && ip.getHostAddress().indexOf(":")==-1){
+                            && ip.getHostAddress().indexOf(":") == -1) {
                         System.out.println("本机的IP = " + ip.getHostAddress());
                         return ip.getHostAddress();
                     }
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

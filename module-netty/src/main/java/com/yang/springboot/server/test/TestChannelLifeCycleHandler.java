@@ -11,10 +11,11 @@ import lombok.extern.slf4j.Slf4j;
  * 测试 channelHandler 生命周期;可根据业务实现业务逻辑
  * <p>
  * 当客户端连接时，对于服务端来说，channel开启
- *      handlerAdded() -> channelRegistered() -> channelActive() -> channelRead() -> channelReadComplete()
- *
+ * handlerAdded() -> channelRegistered() -> channelActive() -> channelRead() -> channelReadComplete()
+ * <p>
  * 当客户端关闭时 ，对于服务端来说，channel被关闭
- *      channelInactive() -> channelUnregistered() -> handlerRemoved()
+ * channelInactive() -> channelUnregistered() -> handlerRemoved()
+ *
  * @author Yang Hao
  * @date 2019/11/14 11:34
  */
