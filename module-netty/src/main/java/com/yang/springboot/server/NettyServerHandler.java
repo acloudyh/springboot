@@ -78,4 +78,15 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         log.info("客户端断开连接。。。TODO 业务逻辑");
     }
+
+    public static void main(String[] args) {
+        String s = "0200006a064762924976014d000003500004100201d9f1230743425e000300a6ffff190403133450000000250400070008000000e2403836373733323033383535333838392d627566322d323031392d30342d30332d31332d33342d34392d3735372d70686f6e652d2e6a706700000020000c14cde78d";
+        log.info("转换后的字符串---{}", getFileAddSpace(s));
+    }
+
+    public static String getFileAddSpace(String replace) {
+        String regex = "(.{2})";
+        replace = replace.replaceAll(regex, "$1 ");
+        return replace;
+    }
 }

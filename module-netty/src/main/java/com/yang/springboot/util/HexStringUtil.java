@@ -1,4 +1,4 @@
-package com.springboot.demo.util;
+package com.yang.springboot.util;
 
 /**
  * @author yanghao

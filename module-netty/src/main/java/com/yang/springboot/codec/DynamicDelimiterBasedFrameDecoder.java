@@ -1,7 +1,6 @@
 package com.yang.springboot.codec;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
@@ -34,6 +33,10 @@ public class DynamicDelimiterBasedFrameDecoder extends DelimiterBasedFrameDecode
         super(maxFrameLength, delimiters);
     }
 
+    public static void main(String[] args) {
+        log.info(String.valueOf("(".getBytes()));
+    }
+
     @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf buffer) throws Exception {
         if (0x7e == buffer.getByte(0)) {
@@ -49,10 +52,5 @@ public class DynamicDelimiterBasedFrameDecoder extends DelimiterBasedFrameDecode
             }
         }
         return null;
-    }
-
-
-    public static void main(String[] args) {
-        log.info(String.valueOf("(".getBytes()));
     }
 }
