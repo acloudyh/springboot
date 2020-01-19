@@ -29,7 +29,7 @@ public class BitOperator {
      * @param bArray
      * @return
      */
-    public  String bytes2BinaryStr(byte[] bArray) {
+    public String bytes2BinaryStr(byte[] bArray) {
 
         String outStr = "";
         int pos = 0;
@@ -53,7 +53,7 @@ public class BitOperator {
      * @param index
      * @return
      */
-    public  int get(byte value, int index) {
+    public int get(byte value, int index) {
         return (value >> index) & 0x1;
     }
 

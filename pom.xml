@@ -47,6 +47,7 @@
         <spring-security-web.version>4.1.3.RELEASE</spring-security-web.version>
         <spring-security-config.version>4.1.3.RELEASE</spring-security-config.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <knife4j.version>2.0.1</knife4j.version>
     </properties>
 
     <modules>
@@ -271,6 +272,31 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-config</artifactId>
                 <version>${spring-security-config.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!--解决进入swagger页面报类型转换错误，排除2.9.2中的引用，手动增加1.5.21版本-->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>1.5.21</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>1.5.21</version>
             </dependency>
 
         </dependencies>
