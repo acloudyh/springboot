@@ -1,9 +1,8 @@
 package com.yang.springboot.server;
 
-import com.yang.springboot.codec.DynamicDelimiterBasedFrameDecoder;
+
 import com.yang.springboot.codec.DynamicNettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -11,18 +10,23 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author yanghao
  * @date 2019/10/31 18:04
  */
 @Slf4j
+@Component
 public class NettyServer {
     private static final int PORT = 8999;
 
-
-    public static void main(String[] args) throws Exception {
+    public void bind() {
         //bossGroup表示监听端口，accept 新连接的线程组，workerGroup表示处理每一条连接的数据读写的线程组
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -43,8 +47,8 @@ public class NettyServer {
 
 
                             //分隔符拆包器 DelimiterBasedFrameDecoder 可以自定义( 调试工具: 网络调试助手 )
-                            ByteBuf delimiter = Unpooled.copiedBuffer(new byte[]{0x7e});
-                            socketChannel.pipeline().addLast(new DynamicDelimiterBasedFrameDecoder(1024, delimiter));
+
+                            socketChannel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.wrappedBuffer(new byte[]{0x7e})));
                             socketChannel.pipeline().addLast(new DynamicNettyServerHandler());
 
 //                        // inBound，处理读数据的逻辑链
@@ -68,24 +72,32 @@ public class NettyServer {
             //异步绑定服务器，调用sync()方法阻塞等待直到绑定完成
 //        ChannelFuture channelFuture = serverBootstrap.bind(PORT).sync();
 
-
             ChannelFuture channelFuture = serverBootstrap.bind(PORT).addListener(future -> {
                 if (future.isSuccess()) {
-                    log.info("netty 服务启动完毕，绑定端口成功：{}", PORT);
+                    log.info("netty 服务启动完毕，绑定端口成功：[{}]", PORT);
                 } else {
-                    log.info("netty 服务启动失败，绑定端口失败：{}", PORT);
+                    log.info("netty 服务启动失败，绑定端口失败：[{}]", PORT);
                 }
             });
 
             //获取Channel 的closeFuture，并且阻塞当前线程直到完成
-
             channelFuture.channel().closeFuture().sync();
+        } catch (Exception e) {
+            log.info("netty 服务启动:{}", e.getMessage());
+            e.printStackTrace();
         } finally {
             // 优雅退出，释放线程池资源
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
 
+    }
+
+    public void start() {
+        ExecutorService es = Executors.newFixedThreadPool(100);
+        es.execute(() -> {
+            this.bind();
+        });
     }
 
 

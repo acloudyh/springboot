@@ -40,7 +40,7 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("API 描述")
+                .title("SpringBoot-Demo API")
                 //创建人
                 .contact(new Contact("yanghao", "https://github.com/acloudyh/springboot-demo", "acloudyh@gmail.com"))
                 //版本号
