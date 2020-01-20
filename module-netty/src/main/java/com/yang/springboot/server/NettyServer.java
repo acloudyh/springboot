@@ -1,6 +1,7 @@
 package com.yang.springboot.server;
 
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.yang.springboot.codec.DynamicNettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.Unpooled;
@@ -14,8 +15,7 @@ import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @author yanghao
@@ -25,6 +25,14 @@ import java.util.concurrent.Executors;
 @Component
 public class NettyServer {
     private static final int PORT = 8999;
+    ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+            .setNameFormat("NettyServer-pool-%d").build();
+
+    //Common Thread Pool
+    ExecutorService executor = new ThreadPoolExecutor(5, 200,
+            0L, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
 
     public void bind() {
         //bossGroup表示监听端口，accept 新连接的线程组，workerGroup表示处理每一条连接的数据读写的线程组
@@ -94,8 +102,7 @@ public class NettyServer {
     }
 
     public void start() {
-        ExecutorService es = Executors.newFixedThreadPool(100);
-        es.execute(() -> {
+        executor.execute(() -> {
             this.bind();
         });
     }
