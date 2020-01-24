@@ -38,7 +38,7 @@ public class Application {
                 protocol,
                 env.getProperty("server.port"),
                 protocol,
-                getLocalHostLANAddress(),
+                getLocalHostLanAddress(),
                 env.getProperty("server.port"),
                 env.getActiveProfiles());
 
@@ -69,7 +69,7 @@ public class Application {
 
 
     // 正确的IP拿法，即优先拿site-local地址
-    private static InetAddress getLocalHostLANAddress() throws UnknownHostException {
+    private static InetAddress getLocalHostLanAddress() throws UnknownHostException {
         try {
             InetAddress candidateAddress = null;
             // 遍历所有的网络接口

@@ -20,13 +20,10 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
-
         for (int i = 0; i < 50; i++) {
             String str = "这是客户端发送的内容哈哈哈哈哈";
             log.info("这里是客户端，开始发送数据给服务端：{}", str);
             ByteBuf buffer = Unpooled.copiedBuffer(str, CharsetUtil.UTF_8);
-
-
             ctx.channel().writeAndFlush(buffer);
         }
 //        String str = "内容：客户端---->服务端";

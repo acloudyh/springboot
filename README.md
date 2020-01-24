@@ -3,7 +3,7 @@
 ### 记录个人学习过程，不定期更新
 
 ## 填坑之路
-[踩坑经历](https://github.com/acloudyh/blog)
+[踩坑经历](https://github.com/acloudyh/blog/issues)
 
 ## 更新记录
 
