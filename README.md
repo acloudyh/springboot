@@ -1,10 +1,9 @@
 ## springboot 学习demo
 
-### 仅记录个人学习过程，以及踩坑，不定期更新
+### 记录个人学习过程，不定期更新
 
 ## 填坑之路
-- [mysql5.7的json类型中文乱码问题](https://www.jianshu.com/p/5bcf37b76d3c)
-- [fasterxml中string字符串转对象json格式单引号错误](https://www.jianshu.com/p/7d6f8926710d)
+[踩坑经历](https://github.com/acloudyh/blog)
 
 ## 更新记录
 
