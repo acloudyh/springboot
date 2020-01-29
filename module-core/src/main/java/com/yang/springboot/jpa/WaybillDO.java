@@ -1,4 +1,4 @@
-package com.yang.springboot.domain.jpa;
+package com.yang.springboot.jpa;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "yh_waybill")
-public class Waybill implements Serializable {
+public class WaybillDO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package com.yang.springboot.domain.jpa;
+package com.yang.springboot.jpa;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Document(collection = "student_info")
-public class StudentEvent {
+public class StudentEventDO {
     private String id;
     private String userName;
     private String passWord;

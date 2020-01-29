@@ -1,7 +1,7 @@
 package com.yang.springboot.controller;
 
-import com.yang.springboot.domain.jpa.Waybill;
-import com.yang.springboot.dto.WaybillDto;
+import com.yang.springboot.jpa.WaybillDO;
+import com.yang.springboot.dto.WaybillDTO;
 import com.yang.springboot.req.WaybillCreateRequest;
 import com.yang.springboot.req.WaybillQueryRequest;
 import com.yang.springboot.req.WaybillUpdateRequest;
@@ -41,8 +41,8 @@ public class WaybillController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "创建运单", notes = "创建相关运单")
-    public WaybillDto createWaybill(@RequestBody @Valid WaybillCreateRequest request) {
-        WaybillDto dto = new WaybillDto();
+    public WaybillDTO createWaybill(@RequestBody @Valid WaybillCreateRequest request) {
+        WaybillDTO dto = new WaybillDTO();
         BeanUtils.copyProperties(request, dto);
         return waybillService.createWaybill(dto);
     }
@@ -62,9 +62,9 @@ public class WaybillController {
 
     @RequestMapping(value = "/{billCode}", method = RequestMethod.PUT)
     @ApiOperation("更新运单")
-    public WaybillDto updateWaybill(@PathVariable String billCode,
+    public WaybillDTO updateWaybill(@PathVariable String billCode,
                                     @RequestBody @Valid WaybillUpdateRequest request) {
-        WaybillDto dto = new WaybillDto();
+        WaybillDTO dto = new WaybillDTO();
         BeanUtils.copyProperties(request, dto);
         dto.setBillCode(billCode);
         return waybillService.updateWaybill(dto);
@@ -72,15 +72,15 @@ public class WaybillController {
 
     @RequestMapping(value = "/{billCode}", method = RequestMethod.GET)
     @ApiOperation("根据运单号查询运单详情")
-    public WaybillDto getWaybillDetails(@PathVariable String billCode) {
+    public WaybillDTO getWaybillDetails(@PathVariable String billCode) {
         return waybillService.getWaybillByBillCode(billCode);
     }
 
     @RequestMapping(method = RequestMethod.GET)
     @ApiOperation("根据运单号查询运单详情")
-    public Page<WaybillDto> listWaybill(WaybillQueryRequest request,
+    public Page<WaybillDTO> listWaybill(WaybillQueryRequest request,
                                         @PageableDefault(sort = {"createdTime"}, direction = Sort.Direction.DESC) Pageable pageable) {
-        WaybillDto dto = new WaybillDto();
+        WaybillDTO dto = new WaybillDTO();
         BeanUtils.copyProperties(request, dto);
         return waybillService.listWaybill(dto, pageable);
     }
@@ -90,19 +90,19 @@ public class WaybillController {
     @ApiOperation("批量创建运单，测试导出文件的功能,内部写死")
     public void createBatchWaybill() {
         long startTime = System.currentTimeMillis();
-        List<Waybill> waybills = new ArrayList<>();
+        List<WaybillDO> waybillDOS = new ArrayList<>();
         int num = 80000;
 
         for (int i = 0; i < num; i++) {
-            Waybill waybill = new Waybill();
-            waybill.setBillCode("wb" + i);
-            waybill.setCarrierEmail(i + "@qq.com");
-            waybill.setCarrierName("王刚" + i);
-            waybill.setCreatedTime(new Date());
-            waybills.add(waybill);
+            WaybillDO waybillDO = new WaybillDO();
+            waybillDO.setBillCode("wb" + i);
+            waybillDO.setCarrierEmail(i + "@qq.com");
+            waybillDO.setCarrierName("王刚" + i);
+            waybillDO.setCreatedTime(new Date());
+            waybillDOS.add(waybillDO);
         }
 
-        waybillService.createBatchWaybill(waybills);
+        waybillService.createBatchWaybill(waybillDOS);
 
         long endTime = System.currentTimeMillis();
         log.info("插入{}条数据耗时:{} ms", num, endTime - startTime);
@@ -112,7 +112,7 @@ public class WaybillController {
     @ApiOperation("Java POI 导出excel文件")
     public void exportWaybills(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
         long startTime = System.currentTimeMillis();
-        WaybillDto dto = new WaybillDto();
+        WaybillDTO dto = new WaybillDTO();
         BeanUtils.copyProperties(request, dto);
         waybillService.exportWaybill(dto, response);
         long endTime = System.currentTimeMillis();
@@ -123,7 +123,7 @@ public class WaybillController {
     @ApiOperation("阿里easyexcel 导出excel文件")
     public void exportWaybillsByAlibaba(WaybillQueryRequest request, HttpServletResponse response) throws IOException {
         long startTime = System.currentTimeMillis();
-        WaybillDto dto = new WaybillDto();
+        WaybillDTO dto = new WaybillDTO();
         BeanUtils.copyProperties(request, dto);
         waybillService.exportWaybillByAlibaba(dto, response);
         long endTime = System.currentTimeMillis();

@@ -1,6 +1,6 @@
 package com.yang.springboot.controller;
 
-import com.yang.springboot.domain.jpa.StudentEvent;
+import com.yang.springboot.jpa.StudentEventDO;
 import com.yang.springboot.service.StudentEventService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,23 +36,23 @@ public class StudentEventController {
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation("批量创建学生，测试mongo ")
     public void createBatchStudent() {
-        List<StudentEvent> studentEvents = new ArrayList<>();
+        List<StudentEventDO> studentEventDOS = new ArrayList<>();
         int num = 10;
 
         for (int i = 0; i < num; i++) {
-            StudentEvent studentEvent = new StudentEvent();
-            studentEvent.setUserName("student" + i);
-            studentEvent.setPassWord("password" + i);
-            studentEvents.add(studentEvent);
+            StudentEventDO studentEventDO = new StudentEventDO();
+            studentEventDO.setUserName("student" + i);
+            studentEventDO.setPassWord("password" + i);
+            studentEventDOS.add(studentEventDO);
         }
 
-        studentEventService.createBatchStudentEvent(studentEvents);
+        studentEventService.createBatchStudentEvent(studentEventDOS);
 
     }
 
     @RequestMapping(method = RequestMethod.GET)
     @ApiOperation("查询所有信息（分页）")
-    public Page<StudentEvent> listStudentInfo(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
+    public Page<StudentEventDO> listStudentInfo(@PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return studentEventService.listStudentEvent(pageable);
     }
 }

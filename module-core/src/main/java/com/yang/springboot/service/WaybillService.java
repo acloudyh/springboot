@@ -1,7 +1,7 @@
 package com.yang.springboot.service;
 
-import com.yang.springboot.domain.jpa.Waybill;
-import com.yang.springboot.dto.WaybillDto;
+import com.yang.springboot.jpa.WaybillDO;
+import com.yang.springboot.dto.WaybillDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -21,7 +21,7 @@ public interface WaybillService {
      * @param dto
      * @return
      */
-    WaybillDto createWaybill(WaybillDto dto);
+    WaybillDTO createWaybill(WaybillDTO dto);
 
 
     /**
@@ -38,7 +38,7 @@ public interface WaybillService {
      * @param dto
      * @return
      */
-    WaybillDto updateWaybill(WaybillDto dto);
+    WaybillDTO updateWaybill(WaybillDTO dto);
 
 
     /**
@@ -47,7 +47,7 @@ public interface WaybillService {
      * @param billCode
      * @return
      */
-    WaybillDto getWaybillByBillCode(String billCode);
+    WaybillDTO getWaybillByBillCode(String billCode);
 
     /**
      * 运单分页接口
@@ -56,15 +56,15 @@ public interface WaybillService {
      * @param pageable
      * @return
      */
-    Page<WaybillDto> listWaybill(WaybillDto dto, Pageable pageable);
+    Page<WaybillDTO> listWaybill(WaybillDTO dto, Pageable pageable);
 
 
     /**
      * 测试用
      *
-     * @param waybills
+     * @param waybillDOS
      */
-    void createBatchWaybill(List<Waybill> waybills);
+    void createBatchWaybill(List<WaybillDO> waybillDOS);
 
     /**
      * 导出运单
@@ -73,7 +73,7 @@ public interface WaybillService {
      * @param response
      * @throws IOException
      */
-    void exportWaybill(WaybillDto dto, HttpServletResponse response) throws IOException;
+    void exportWaybill(WaybillDTO dto, HttpServletResponse response) throws IOException;
 
     /**
      * 导出运单
@@ -83,7 +83,7 @@ public interface WaybillService {
      * @param response
      * @throws IOException
      */
-    void exportWaybillByAlibaba(WaybillDto dto, HttpServletResponse response) throws IOException;
+    void exportWaybillByAlibaba(WaybillDTO dto, HttpServletResponse response) throws IOException;
 
 
 }

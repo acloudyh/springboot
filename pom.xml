@@ -52,12 +52,10 @@
 
     <modules>
         <module>module-core</module>
-        <module>module-persistence</module>
         <module>module-batch</module>
         <module>module-web</module>
         <module>module-common</module>
         <module>module-api</module>
-        <module>module-modbus</module>
         <module>module-netty</module>
     </modules>
 
@@ -75,11 +73,6 @@
                 <version>${module.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.springboot</groupId>
-                <artifactId>module-persistence</artifactId>
-                <version>${module.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>com.springboot</groupId>

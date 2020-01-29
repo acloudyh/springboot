@@ -1,6 +1,6 @@
 package com.yang.springboot.service.impl;
 
-import com.yang.springboot.domain.jpa.StudentEvent;
+import com.yang.springboot.jpa.StudentEventDO;
 import com.yang.springboot.repo.mongo.StudentEventMongoRepo;
 import com.yang.springboot.service.StudentEventService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,12 @@ public class StudentEventServiceImpl implements StudentEventService {
     private StudentEventMongoRepo studentEventMongoRepo;
 
     @Override
-    public void createBatchStudentEvent(List<StudentEvent> studentEvents) {
-        studentEventMongoRepo.save(studentEvents);
+    public void createBatchStudentEvent(List<StudentEventDO> studentEventDOS) {
+        studentEventMongoRepo.save(studentEventDOS);
     }
 
     @Override
-    public Page<StudentEvent> listStudentEvent(Pageable pageable) {
+    public Page<StudentEventDO> listStudentEvent(Pageable pageable) {
         return studentEventMongoRepo.findAll(pageable);
     }
 }

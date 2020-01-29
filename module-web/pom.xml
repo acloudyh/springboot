@@ -20,7 +20,7 @@
 
         <dependency>
             <groupId>com.springboot</groupId>
-            <artifactId>module-batch</artifactId>
+            <artifactId>module-core</artifactId>
         </dependency>
 
         <dependency>

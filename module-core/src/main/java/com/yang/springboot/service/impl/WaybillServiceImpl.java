@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.yang.springboot.common.constants.ExportConstants;
 import com.yang.springboot.common.utils.*;
 import com.yang.springboot.config.MailConfig;
-import com.yang.springboot.domain.jpa.Waybill;
-import com.yang.springboot.dto.WaybillDto;
+import com.yang.springboot.jpa.WaybillDO;
+import com.yang.springboot.dto.WaybillDTO;
 import com.yang.springboot.repo.WaybillRepo;
 import com.yang.springboot.service.WaybillService;
 import io.jsonwebtoken.lang.Assert;
@@ -57,12 +57,12 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     private RedisTemplate redisTemplate;
 
     @Override
-    public WaybillDto createWaybill(WaybillDto dto) {
+    public WaybillDTO createWaybill(WaybillDTO dto) {
         Assert.isNull(waybillRepo.findOneByBillCode(dto.getBillCode()), "运单已存在");
-        Waybill waybill = toDomain(dto, Waybill.class);
-        waybill.setCreatedTime(new Date());
+        WaybillDO waybillDO = toDomain(dto, WaybillDO.class);
+        waybillDO.setCreatedTime(new Date());
         String key = RedisUtil.waybillKey(dto.getBillCode());
-        WaybillDto waybillDto = toDto(waybillRepo.save(waybill), WaybillDto.class);
+        WaybillDTO waybillDto = toDto(waybillRepo.save(waybillDO), WaybillDTO.class);
         RedisUtil.valueAdd(key, waybillDto, true, TimeUnit.MINUTES, redisTemplate);
         return waybillDto;
     }
@@ -75,29 +75,29 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     }
 
     @Override
-    public WaybillDto updateWaybill(WaybillDto dto) {
+    public WaybillDTO updateWaybill(WaybillDTO dto) {
 
-        Waybill waybill = waybillRepo.findOneByBillCode(dto.getBillCode());
-        Assert.notNull(waybill, "该运单不存在");
+        WaybillDO waybillDO = waybillRepo.findOneByBillCode(dto.getBillCode());
+        Assert.notNull(waybillDO, "该运单不存在");
         if (dto.getCarrierName() != null) {
-            waybill.setCarrierName(dto.getCarrierName());
+            waybillDO.setCarrierName(dto.getCarrierName());
         }
         if (dto.getCarrierEmail() != null) {
-            waybill.setCarrierEmail(dto.getCarrierEmail());
+            waybillDO.setCarrierEmail(dto.getCarrierEmail());
         }
 
-        return toDto(waybillRepo.save(waybill), WaybillDto.class);
+        return toDto(waybillRepo.save(waybillDO), WaybillDTO.class);
     }
 
     @Override
-    public WaybillDto getWaybillByBillCode(String billCode) {
-        WaybillDto waybillDto = new WaybillDto();
+    public WaybillDTO getWaybillByBillCode(String billCode) {
+        WaybillDTO waybillDto = new WaybillDTO();
 
         waybillDto = RedisUtil.valueGet(RedisUtil.waybillKey(billCode), redisTemplate);
         if (waybillDto != null) {
             log.info("走了redis缓存");
         } else {
-            waybillDto = toDto(waybillRepo.findOneByBillCode(billCode), WaybillDto.class);
+            waybillDto = toDto(waybillRepo.findOneByBillCode(billCode), WaybillDTO.class);
             log.info("没有走redis缓存");
         }
 
@@ -105,17 +105,17 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     }
 
     @Override
-    public Page<WaybillDto> listWaybill(WaybillDto dto, Pageable pageable) {
-        Page<Waybill> waybills = waybillRepo.findAll((root, query, cb) -> {
+    public Page<WaybillDTO> listWaybill(WaybillDTO dto, Pageable pageable) {
+        Page<WaybillDO> waybills = waybillRepo.findAll((root, query, cb) -> {
             List<Predicate> predicates = getWaybillPredicates(dto, root, cb);
 
             return cb.and(predicates.stream().toArray(Predicate[]::new));
         }, pageable);
 
-        return waybills.map(v -> toDto(v, WaybillDto.class));
+        return waybills.map(v -> toDto(v, WaybillDTO.class));
     }
 
-    private List<Predicate> getWaybillPredicates(WaybillDto dto, Root<Waybill> root, CriteriaBuilder cb) {
+    private List<Predicate> getWaybillPredicates(WaybillDTO dto, Root<WaybillDO> root, CriteriaBuilder cb) {
         List<Predicate> predicates = new ArrayList<>();
         String billCode = dto.getBillCode();
         if (billCode != null) {
@@ -135,12 +135,12 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     }
 
     @Override
-    public void createBatchWaybill(List<Waybill> waybills) {
-        waybillRepo.save(waybills);
+    public void createBatchWaybill(List<WaybillDO> waybillDOS) {
+        waybillRepo.save(waybillDOS);
     }
 
     @Override
-    public void exportWaybill(WaybillDto dto, HttpServletResponse response) throws IOException {
+    public void exportWaybill(WaybillDTO dto, HttpServletResponse response) throws IOException {
 
         List waybillDtos = getExportData(dto);
 
@@ -178,20 +178,20 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     }
 
     @Override
-    public void exportWaybillByAlibaba(WaybillDto dto, HttpServletResponse response) throws IOException {
+    public void exportWaybillByAlibaba(WaybillDTO dto, HttpServletResponse response) throws IOException {
         List waybillDtos = getExportData(dto);
-        EasyExcelUtil.export(waybillDtos, response, WaybillDto.class);
+        EasyExcelUtil.export(waybillDtos, response, WaybillDTO.class);
 //        EasyExcelUtil.exportNoModel(waybillDtos, response, WaybillDto.class);
     }
 
 
-    private List getExportData(WaybillDto dto) {
-        List<Waybill> waybills = waybillRepo.findAll((root, query, cb) -> {
+    private List getExportData(WaybillDTO dto) {
+        List<WaybillDO> waybillDOS = waybillRepo.findAll((root, query, cb) -> {
             List<Predicate> predicates = getWaybillPredicates(dto, root, cb);
             return cb.and(predicates.stream().toArray(Predicate[]::new));
         });
 
-        return waybills.stream().map(x -> toDto(x, WaybillDto.class)).collect(Collectors.toList());
+        return waybillDOS.stream().map(x -> toDto(x, WaybillDTO.class)).collect(Collectors.toList());
     }
 
 

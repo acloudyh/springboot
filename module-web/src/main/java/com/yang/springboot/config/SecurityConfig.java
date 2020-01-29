@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -39,12 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    public UserDetailsService userDetailsService() {
 //        return super.userDetailsService();
 //    }
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //user Details Service验证
-        auth.userDetailsService(this.userDetailsService());
-
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -74,8 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-            log.info("需要校验权限");
-            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "拒绝访问");
+            //TODO
+//            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "拒绝访问");
         }
     }
 

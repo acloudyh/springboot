@@ -19,8 +19,7 @@ import java.util.Date;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "Waybill", description = "运单")
-public class WaybillDto extends BaseRowModel implements Serializable {
-
+public class WaybillDTO extends BaseRowModel implements Serializable {
 
     @ApiModelProperty(value = "运单号")
     @ExcelProperty(value = "运单号", index = 0)
