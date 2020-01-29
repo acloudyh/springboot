@@ -1,5 +1,6 @@
 package com.yang.springboot.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,13 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author yanghao
- * @date 2019-05-15 11:44
+ * @author Yang Hao
+ * @date 2020/1/29 20:36
  */
+@Slf4j
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private EntryPointUnauthorizedHandler entryPointUnauthorizedHandler;
@@ -72,6 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+            log.info("需要校验权限");
             httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "拒绝访问");
         }
     }

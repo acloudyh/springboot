@@ -3,6 +3,7 @@ package com.yang.springboot.server;
 
 import com.yang.springboot.codec.DynamicNettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -27,6 +28,7 @@ public class NettyServer {
     private final EventLoopGroup bossGroup = new NioEventLoopGroup();
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
     private Channel channel;
+    private static final ByteBuf[] DELIMITERS = {Unpooled.wrappedBuffer(new byte[]{0x7e})};
 
     public void start(String nettyHost, int nettyPort) {
 
@@ -49,7 +51,7 @@ public class NettyServer {
 
                     //分隔符拆包器 DelimiterBasedFrameDecoder 可以自定义( 调试工具: 网络调试助手 )
                     socketChannel.pipeline().addLast(new IdleStateHandler(0, 0, 10, TimeUnit.SECONDS));
-                    socketChannel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, Unpooled.wrappedBuffer(new byte[]{0x7e})));
+                    socketChannel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, DELIMITERS));
                     socketChannel.pipeline().addLast(new DynamicNettyServerHandler());
 
 //                        // inBound，处理读数据的逻辑链

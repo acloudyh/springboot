@@ -89,12 +89,3 @@ spring:
 
       # 连接池中的最小空闲连接
       min-idle: 0
-
-  #banner
-  main:
-    show-banner: false
-
-#security:
-#  oauth2:
-#    resource:
-#      filter-order: 3
