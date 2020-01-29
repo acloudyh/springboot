@@ -24,11 +24,11 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 public class NettyServer {
+    private static final ByteBuf[] DELIMITERS = {Unpooled.wrappedBuffer(new byte[]{0x7e})};
     //bossGroup表示监听端口，accept 新连接的线程组，workerGroup表示处理每一条连接的数据读写的线程组
     private final EventLoopGroup bossGroup = new NioEventLoopGroup();
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
     private Channel channel;
-    private static final ByteBuf[] DELIMITERS = {Unpooled.wrappedBuffer(new byte[]{0x7e})};
 
     public void start(String nettyHost, int nettyPort) {
 

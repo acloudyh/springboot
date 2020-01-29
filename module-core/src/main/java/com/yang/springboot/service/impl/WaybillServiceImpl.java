@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.yang.springboot.common.constants.ExportConstants;
 import com.yang.springboot.common.utils.*;
 import com.yang.springboot.config.MailConfig;
-import com.yang.springboot.jpa.WaybillDO;
+import com.yang.springboot.dto.EasyExcelWaybillDTO;
 import com.yang.springboot.dto.WaybillDTO;
+import com.yang.springboot.jpa.WaybillDO;
 import com.yang.springboot.repo.WaybillRepo;
 import com.yang.springboot.service.WaybillService;
-import io.jsonwebtoken.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.data.domain.Page;
@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -57,10 +58,12 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     private RedisTemplate redisTemplate;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public WaybillDTO createWaybill(WaybillDTO dto) {
-        Assert.isNull(waybillRepo.findOneByBillCode(dto.getBillCode()), "运单已存在");
+        DemoAssert.isNull(waybillRepo.findOneByBillCode(dto.getBillCode()), "运单已存在");
         WaybillDO waybillDO = toDomain(dto, WaybillDO.class);
         waybillDO.setCreatedTime(new Date());
+        waybillDO.setUpdateTime(new Date());
         String key = RedisUtil.waybillKey(dto.getBillCode());
         WaybillDTO waybillDto = toDto(waybillRepo.save(waybillDO), WaybillDTO.class);
         RedisUtil.valueAdd(key, waybillDto, true, TimeUnit.MINUTES, redisTemplate);
@@ -78,14 +81,14 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     public WaybillDTO updateWaybill(WaybillDTO dto) {
 
         WaybillDO waybillDO = waybillRepo.findOneByBillCode(dto.getBillCode());
-        Assert.notNull(waybillDO, "该运单不存在");
+        DemoAssert.notNull(waybillDO, "该运单不存在");
         if (dto.getCarrierName() != null) {
             waybillDO.setCarrierName(dto.getCarrierName());
         }
         if (dto.getCarrierEmail() != null) {
             waybillDO.setCarrierEmail(dto.getCarrierEmail());
         }
-
+        waybillDO.setUpdateTime(new Date());
         return toDto(waybillRepo.save(waybillDO), WaybillDTO.class);
     }
 
@@ -180,7 +183,7 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
     @Override
     public void exportWaybillByAlibaba(WaybillDTO dto, HttpServletResponse response) throws IOException {
         List waybillDtos = getExportData(dto);
-        EasyExcelUtil.export(waybillDtos, response, WaybillDTO.class);
+        EasyExcelUtil.export(waybillDtos, response, EasyExcelWaybillDTO.class);
 //        EasyExcelUtil.exportNoModel(waybillDtos, response, WaybillDto.class);
     }
 

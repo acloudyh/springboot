@@ -1,20 +1,18 @@
-package com.yang.springboot.dto;
+package com.yang.springboot.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * @author Yang Hao
- * @date 2020/1/29 21:53
+ * @date 2020/1/29 21:38
  */
 @Data
-@ApiModel("WaybillDTO")
-public class WaybillDTO extends BaseDTO implements Serializable {
-
-    private static final long serialVersionUID = 8935807941634142743L;
+@ApiModel("WaybillVO")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class WaybillVO extends BaseVO {
 
     @ApiModelProperty(value = "运单号")
     private String billCode;

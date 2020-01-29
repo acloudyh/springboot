@@ -51,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-//                .antMatchers("/websocket/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/v2/**").permitAll()
@@ -59,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/doc.html").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/web/**").permitAll()
-                .anyRequest().authenticated();
+//                .anyRequest().authenticated();
+                .anyRequest().permitAll();
     }
 
     @Component
@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
             //TODO
-//            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "拒绝访问");
+            httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "拒绝访问");
         }
     }
 
