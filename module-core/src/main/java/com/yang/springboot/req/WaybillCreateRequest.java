@@ -1,5 +1,6 @@
 package com.yang.springboot.req;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Pattern;
  * @date 2019-04-18 16:49
  */
 @Data
+@ApiModel
 public class WaybillCreateRequest {
 
     @NotNull(message = "运单号不能为空")
