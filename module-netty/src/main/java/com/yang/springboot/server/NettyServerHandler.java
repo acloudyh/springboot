@@ -22,18 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
-
-    public static void main(String[] args) {
-        String s = "00010020232d333342d343";
-        log.info("转换后的字符串---{}", getFileAddSpace(s));
-    }
-
-    public static String getFileAddSpace(String replace) {
-        String regex = "(.{2})";
-        replace = replace.replaceAll(regex, "$1 ");
-        return replace;
-    }
-
     /**
      * 每个传入的消息都要调用
      *

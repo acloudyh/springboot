@@ -3,17 +3,12 @@
 ### 记录个人学习过程，不定期更新
 
 ## 填坑之路
-[踩坑经历](https://github.com/acloudyh/blog/issues)
+[踩坑经历,记录博客](https://me.csdn.net/yanghao937170)
 
 ## 更新记录
 
-
 #### 2019.11.20
-1. 字节 字节数组 二进制工具类
-2. netty 学习
-    - netty 客户端服务端通信demo
-    - channelHandler 生命周期
-    - netty 自定义分隔符解码器(首尾分隔符,首位不同分隔符)
+[netty 学习 README.md](./module-netty/README.md)
 
 
 #### 2019.5.29

@@ -39,7 +39,8 @@ public class DynamicNettyServerHandler extends ChannelInboundHandlerAdapter {
             return;
         }
         //分隔符解码器会将首位标识符去掉
-        log.info("DynamicNettyServerHandler: 0x7e 接收 报文[{}]", ByteBufUtil.hexDump(byteBuf));
+
+        log.info("DynamicNettyServerHandler: 服务端接收报文[ {} ]", getFileAddSpace(ByteBufUtil.hexDump(byteBuf)));
 
         //TODO 解码业务逻辑
         //响应客户端,具体响应报文由协议决定 demo中一律回复7e 66 88 7e
@@ -48,7 +49,7 @@ public class DynamicNettyServerHandler extends ChannelInboundHandlerAdapter {
 
         //增加首位标识符
         ByteBuf respByteBuf = Unpooled.wrappedBuffer(Unpooled.wrappedBuffer(new byte[]{0x7e}), Unpooled.copiedBuffer(respByte), Unpooled.wrappedBuffer(new byte[]{0x7e}));
-        log.info("DynamicNettyServerHandler: 0x7e 响应 报文[{}]", ByteBufUtil.hexDump(respByteBuf));
+        log.info("DynamicNettyServerHandler: 服务端响应 报文[ {} ]", getFileAddSpace(ByteBufUtil.hexDump(respByteBuf)));
         ctx.channel().writeAndFlush(respByteBuf).sync();
     }
 
@@ -93,6 +94,14 @@ public class DynamicNettyServerHandler extends ChannelInboundHandlerAdapter {
         bitOperator.concatAll(b);
         log.info("");
 
+    }
+
+
+
+    public static String getFileAddSpace(String replace) {
+        String regex = "(.{2})";
+        replace = replace.replaceAll(regex, "$1 ");
+        return replace;
     }
 
 
