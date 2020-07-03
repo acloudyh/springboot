@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -36,6 +37,8 @@ import java.util.List;
 public class WaybillController {
     @Resource
     private WaybillService waybillService;
+    @Value("${test.number}")
+    private Integer testNumber;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
@@ -48,6 +51,10 @@ public class WaybillController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String createWaybill() {
+
+        Integer s = testNumber;
+        log.info("weweew");
+
         return "hello";
     }
 
