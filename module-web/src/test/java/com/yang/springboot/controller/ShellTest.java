@@ -1,13 +1,12 @@
 package com.yang.springboot.controller;
 
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.SCPClient;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.File;
 
 /**
  * @author Yang Hao
@@ -16,13 +15,9 @@ import java.nio.charset.StandardCharsets;
 @SpringBootTest
 @Slf4j
 public class ShellTest {
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
+    private static String ip = "ip";
+    private static String username = "root";
+    private static String password = "password";
 
     @Test
     public void test_shell() {
@@ -44,11 +39,47 @@ public class ShellTest {
 
 
     @Test
-    public void test_shell_server() throws IOException {
-        SSHTool tool = new SSHTool("ip", "username", "password", StandardCharsets.UTF_8);
+    public void test_shell_server_with_username_password() {
+        RemoteConnectInfo connectInfo = new RemoteConnectInfo(ip, username, password);
         String cmd = "service server-1.0 restart";
-        StringBuilder exec = tool.exec(cmd);
-        System.out.println(exec);
+        Connection connection = SSHToolUtil.login(connectInfo);
+        String result = SSHToolUtil.execute(cmd, connection);
+        System.out.println(result);
 
     }
+
+
+    @Test
+    public void test_shell_server_with_keyFile() {
+
+        RemoteConnectInfo connectInfo = new RemoteConnectInfo(ip, username, password);
+        File keyFile = new File("/Users/neo/Documents/certificate/devlab.pem");
+        Connection connection = SSHToolUtil.loginByFileKey(connectInfo, keyFile, null);
+        String cmd = "ls";
+        String result = SSHToolUtil.execute(cmd, connection);
+        System.out.println(result);
+    }
+
+
+    @Test
+    public void test_shell_server_result() {
+        RemoteConnectInfo connectInfo = new RemoteConnectInfo(ip, username, password);
+        String cmd = "sshpass -p password scp /opt/server-1.0.0-SNAPSHOT.jar root@ip:/tmp/";
+        Connection connection = SSHToolUtil.login(connectInfo);
+        int status = SSHToolUtil.executeWithResult(cmd, connection);
+        System.out.println(status);
+    }
+
+
+    @Test
+    public void test_shell_server_upload_file() {
+        RemoteConnectInfo connectInfo = new RemoteConnectInfo(ip, username, password);
+        String cmd = "sshpass -p password scp /opt/server-1.0.0-SNAPSHOT.jar root@ip:/tmp/";
+        Connection connection = SSHToolUtil.login(connectInfo);
+        SCPClient scpClient = new SCPClient(connection);
+
+
+    }
+
+
 }
