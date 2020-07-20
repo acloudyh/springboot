@@ -3,7 +3,7 @@
 ### 记录个人学习过程，不定期更新
 
 ## 填坑之路
-[踩坑经历,记录博客](https://me.csdn.net/yanghao937170)
+[踩坑经历,记录博客](https://blog.csdn.net/yanghao937170)
 
 ## 更新记录
 
@@ -44,7 +44,7 @@ private BigDecimal overCycleDataUsage = BigDecimal.ZERO;
 ```
 
 #### 2019.4.29
-1. netty jt808协议 [大佬的github](https://github.com/hylexus/jt-808-protocol)
+1. netty jt808协议 [借鉴github](https://github.com/hylexus/jt-808-protocol)
 
 #### 2019.4.24
 1. springboot 整合spring kafka（先暂停）
