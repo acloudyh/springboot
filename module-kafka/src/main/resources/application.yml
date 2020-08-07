@@ -1,0 +1,29 @@
+server:
+  port: 8889
+
+spring:
+  kafka:
+    bootstrap-servers[0]: 127.0.0.1:9092
+    # kafka topic 代码中写死
+    topic: my-topic
+    listener:
+      missing-topics-fatal: false
+    producer:
+      retries: 0
+      # 每次批量发送消息的数量
+      batch-size: 16384
+      buffer-memory: 33554432
+      # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 1
+
+    consumer:
+      group-id: springboot-demo-group
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        session.timeout.ms: 15000

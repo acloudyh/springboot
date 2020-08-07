@@ -51,7 +51,7 @@
 
     <modules>
         <module>module-core</module>
-        <module>module-batch</module>
+        <module>module-kafka</module>
         <module>module-web</module>
         <module>module-common</module>
         <module>module-api</module>
@@ -75,7 +75,7 @@
 
             <dependency>
                 <groupId>com.springboot</groupId>
-                <artifactId>module-batch</artifactId>
+                <artifactId>module-kafka</artifactId>
                 <version>${module.version}</version>
             </dependency>
 

@@ -15,7 +15,7 @@ import java.util.Optional;
 @Component
 public class KafkaReceiver {
 
-    @KafkaListener(topics = {"springboot-demo-yang"})
+    @KafkaListener(topics = {"my-topic"})
     // 可以监听多个topic
 //    @KafkaListener(topics = {"springboot-demo-yang","springboot-demo-yang2"})
     public void listen(ConsumerRecord<?, ?> record) {
@@ -23,9 +23,8 @@ public class KafkaReceiver {
         if (msg.isPresent()) {
 
             Object message = msg.get();
-            log.info("开始接受kafka消息");
-            log.info("==>record:{}", record);
-            log.info("==>message:{}", message);
+            log.info("========> 开始接受kafka record record:{}", record);
+            log.info("========> 开始接受kafka message message:{}", message);
         }
     }
 }

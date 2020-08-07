@@ -19,7 +19,6 @@ import java.util.UUID;
 @Component
 @Slf4j
 public class KafkaSender {
-
     @Resource
     private KafkaTemplate<String, String> kafkaTemplate;
 
@@ -31,6 +30,6 @@ public class KafkaSender {
         String gson = new Gson().toJson(kafkaMessage);
         log.info("========> 开始发送消息，kafkaMessage:{}", gson);
 
-        kafkaTemplate.send("springboot-demo-yang", gson);
+        kafkaTemplate.send("my-topic", gson);
     }
 }

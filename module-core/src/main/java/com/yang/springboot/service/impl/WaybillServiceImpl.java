@@ -164,7 +164,7 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
                     InputStream inputStream = ExcelUtil.getExcelInputStream(title, headMap, jsonArray);
 
                     Context context = new Context();
-                    context.setVariable("createdTime", DateUtil.formatTimestampDate(new Date()));
+//                    context.setVariable("createdTime", DateUtil.formatTimestampDate(new Date()));
                     String content = templateEngine.process("email", context);
 
                     MailUtil.MailParam param = new MailUtil.MailParam(mailConfig.getFrom(), mailConfig.getTo(), "运单信息", content, inputStream);
