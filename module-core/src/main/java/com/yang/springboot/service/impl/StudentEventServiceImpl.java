@@ -24,7 +24,7 @@ public class StudentEventServiceImpl implements StudentEventService {
 
     @Override
     public void createBatchStudentEvent(List<StudentEventDO> studentEventDOS) {
-        studentEventMongoRepo.save(studentEventDOS);
+        studentEventMongoRepo.saveAll(studentEventDOS);
     }
 
     @Override

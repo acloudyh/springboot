@@ -7,7 +7,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.Filter;
 
@@ -16,7 +15,7 @@ import javax.servlet.Filter;
  * @date 2020/1/19 15:03
  */
 @Configuration
-public class SpringMVCConfig {
+public class SpringMVCConfig implements WebMvcConfigurer {
 
     @Order(Ordered.HIGHEST_PRECEDENCE)
     @Bean
@@ -27,17 +26,12 @@ public class SpringMVCConfig {
         return filter;
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("*")
-                        .allowedMethods("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS")
-                        .allowCredentials(true).maxAge(3600);
-            }
-        };
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("POST", "GET", "PUT", "DELETE", "PATCH", "OPTIONS")
+                .allowCredentials(true).maxAge(3600);
     }
 
 

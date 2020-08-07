@@ -49,15 +49,6 @@ public class WaybillController {
         return waybillService.createWaybill(dto);
     }
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String createWaybill() {
-
-        Integer s = testNumber;
-        log.info("weweew");
-
-        return "hello";
-    }
-
     @RequestMapping(value = "/{billCode}", method = RequestMethod.DELETE)
     @ApiOperation(value = "删除运单", notes = "删除相关运单")
     public void deleteWaybill(@PathVariable String billCode) {

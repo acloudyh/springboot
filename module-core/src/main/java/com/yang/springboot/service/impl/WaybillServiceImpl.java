@@ -43,13 +43,10 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
 
     @Resource
     private WaybillRepo waybillRepo;
-
     @Resource
     private MailConfig mailConfig;
-
     @Resource
     private TemplateEngine templateEngine;
-
     @Resource
     private JavaMailSender javaMailSender;
 
@@ -139,7 +136,7 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
 
     @Override
     public void createBatchWaybill(List<WaybillDO> waybillDOS) {
-        waybillRepo.save(waybillDOS);
+        waybillRepo.saveAll(waybillDOS);
     }
 
     @Override

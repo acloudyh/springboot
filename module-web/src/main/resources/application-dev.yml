@@ -1,14 +1,18 @@
 server:
   port: 8888
 
+
 # ===============================
 # = DATA SOURCE
 # ===============================
 
 # Set here configurations for the database connection
 spring:
+  # 设置为true时，后定义的bean会覆盖之前定义的相同名称的bean
+  main:
+    allow-bean-definition-overriding: true
   datasource:
-    #    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: net.sf.log4jdbc.DriverSpy
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:log4jdbc:mysql://localhost:3306/springboot-demo?useUnicode=true&characterEncoding=utf8&useSSL=false
