@@ -1,5 +1,7 @@
 package com.yang.springboot.牛客网;
 
+import java.util.Scanner;
+
 /**
  * 写出一个程序，接受一个十六进制的数，输出该数值的十进制表示。（多组同时输入 ）
  *
@@ -10,15 +12,16 @@ public class Test07 {
 
 
     public static void main(String[] args) {
-        conversion();
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println(Integer.toHexString(10));
-//        System.out.println(Integer.parseInt("10", 10));
-//        while (sc.hasNext()) {
-//            String str = sc.nextLine().substring(2);
-//            int s = Integer.parseInt(str, 16);
-//            System.out.println(s);
-//        }
+//        //进制转换
+//        conversion();
+        Scanner sc = new Scanner(System.in);
+        System.out.println(Integer.toHexString(10));
+        System.out.println(Integer.parseInt("10", 10));
+        while (sc.hasNext()) {
+            String str = sc.nextLine().substring(2);
+            int s = Integer.parseInt(str, 16);
+            System.out.println(s);
+        }
     }
 
 
