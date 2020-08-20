@@ -1,0 +1,40 @@
+package com.yang.springboot.study;
+
+import java.util.Date;
+
+/**
+ * @author Yang Hao
+ * @date 2020/7/29
+ */
+public class MyRunnable implements Runnable {
+
+
+    private String command;
+
+    public MyRunnable(String s) {
+        this.command = s;
+    }
+
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + "-开始时间-" + new Date());
+        processCommand();
+        System.out.println(Thread.currentThread().getName() + "-结束时间-" + new Date());
+    }
+
+
+    private void processCommand() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        return this.command;
+    }
+}
