@@ -40,7 +40,7 @@ public class ThreadPoolExecutorDemo {
     //最大线程数 10
     private static final int MAX_POOL_SIZE = 10;
 
-
+    //队列大小
     private static final int QUEUE_CAPACITY = 100;
 
     //线程空闲时间
