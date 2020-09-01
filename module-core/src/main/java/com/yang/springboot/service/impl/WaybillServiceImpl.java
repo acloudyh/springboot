@@ -184,7 +184,6 @@ public class WaybillServiceImpl extends BaseServiceImpl implements WaybillServic
 //        EasyExcelUtil.exportNoModel(waybillDtos, response, WaybillDto.class);
     }
 
-
     private List getExportData(WaybillDTO dto) {
         List<WaybillDO> waybillDOS = waybillRepo.findAll((root, query, cb) -> {
             List<Predicate> predicates = getWaybillPredicates(dto, root, cb);

@@ -22,7 +22,7 @@ public class WaybillDO implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "bigint(20) AUTO_INCREMENT NOT NULL COMMENT '主键'")
-    private Long id;
+    private Integer id;
 
     @Column(name = "bill_code", columnDefinition = "varchar(32) COMMENT '运单号'", nullable = false)
     private String billCode;

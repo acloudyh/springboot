@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author yanghao
  * @date 2019-04-18 16:44
  */
-public interface WaybillRepo extends JpaRepository<WaybillDO, String>, JpaSpecificationExecutor<WaybillDO> {
+public interface WaybillRepo extends JpaRepository<WaybillDO, Integer>, JpaSpecificationExecutor<WaybillDO> {
 
     /**
      * 删除运单
