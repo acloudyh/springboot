@@ -18,10 +18,8 @@ import javax.annotation.Resource;
 @Slf4j
 public class TestTransactionServiceImpl implements TestTransactionService {
 
-
     @Resource
     private TeacherRepo teacherRepo;
-
 
     @Override
     @Transactional
