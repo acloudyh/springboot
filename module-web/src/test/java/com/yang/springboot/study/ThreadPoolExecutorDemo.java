@@ -41,7 +41,7 @@ public class ThreadPoolExecutorDemo {
     private static final int MAX_POOL_SIZE = 10;
 
     //队列大小
-    private static final int QUEUE_CAPACITY = 100;
+    private static final int QUEUE_CAPACITY = 12;
 
     //线程空闲时间
     private static final Long KEEP_ALIVE_TIME = 1L;
@@ -55,7 +55,7 @@ public class ThreadPoolExecutorDemo {
                 TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(QUEUE_CAPACITY),
                 new ThreadPoolExecutor.AbortPolicy());
-        for (int i = 0; i <10; i++) {
+        for (int i = 0; i <100; i++) {
             Runnable work = new MyRunnable("" + i);
             executor.execute(work);
         }
