@@ -142,7 +142,13 @@ public class SSHToolUtil {
 
     public static void main(String[] args) throws IOException {
 
-
+//        //参考链接: https://juejin.im/post/5d843679f265da03f04d0687
+//
+//        SSHTool tool = new SSHTool("ip", "root", "password", StandardCharsets.UTF_8);
+//        String cmd = "service gmp-server-1.0 restart";
+//        cmd = "sshpass -p oracle scp /opt/logback.xml root@ip:/tmp";
+//        StringBuilder exec = tool.exec(cmd);
+//        System.out.println(exec);
 
 
     }
