@@ -1,7 +1,6 @@
 package com.yang.springboot.server;
 
 
-import com.yang.springboot.codec.DynamicNettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -9,13 +8,10 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 1、创建ServerBootStrap实例
@@ -64,15 +60,15 @@ public class NettyServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
 //                            //常规业务逻辑
-//                            ch.pipeline().addLast(new NettyServerHandler());
+                            ch.pipeline().addLast(new NettyServerHandler());
 
 //                            //固定长度的拆包器 FixedLengthFrameDecoder
 //                            ch.pipeline().addLast(new FixedLengthFrameDecoder(55));
 
                             //分隔符拆包器 DelimiterBasedFrameDecoder 可以自定义( 调试工具: 网络调试助手 )
-                            ch.pipeline().addLast(new IdleStateHandler(0, 0, 10, TimeUnit.SECONDS));
-                            ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, DELIMITERS));
-                            ch.pipeline().addLast(new DynamicNettyServerHandler());
+//                            ch.pipeline().addLast(new IdleStateHandler(0, 0, 10, TimeUnit.SECONDS));
+//                            ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, DELIMITERS));
+//                            ch.pipeline().addLast(new DynamicNettyServerHandler());
 
 //                            // inBound，处理读数据的逻辑链
 //                            ch.pipeline().addLast(new TestInboundHandlerA());

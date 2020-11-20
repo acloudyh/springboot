@@ -4,4 +4,4 @@ server:
 #Netty 服务器相关配置
 netty:
   host: 127.0.0.1
-  port: 55342
+  port: 8999

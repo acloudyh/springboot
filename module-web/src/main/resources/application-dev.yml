@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 8886
 
 
 # ===============================
@@ -39,7 +39,7 @@ spring:
     # schema will be automatically updated accordingly to java entities found in
     # the project
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     # Allows Hibernate to generate SQL optimized for a particular DBMS  MySQL57InnoDBDialect
     properties:
       hibernate:
