@@ -10,9 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Test1 {
     public static void main(String[] args) {
 
-
         List list3 = new ArrayList();
         LinkedList<Object> objects = new LinkedList<>();
+        Vector vector = new Vector();
         List synchronizedList = Collections.synchronizedList(new LinkedList());
         Map hashMap = new HashMap();
 
@@ -20,6 +20,8 @@ public class Test1 {
         TreeSet treeSet = new TreeSet<Object>();
         Map hashtable = new Hashtable();
         Map concurrentHashMap = new ConcurrentHashMap();
+        StringBuilder sb = new StringBuilder();
+        StringBuffer sbf = new StringBuffer();
 
 //        Scanner sc = new Scanner(System.in);
 //        while (sc.hasNext()) {
@@ -37,9 +39,8 @@ public class Test1 {
 
 
         int num = 2147483647;
-        num +=2;
+        num += 2;
         System.err.println(num);
-
 
 
 //
