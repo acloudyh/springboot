@@ -44,6 +44,8 @@ public class Application {
 
     }
 
+
+
     private static String getHostIp() {
         try {
             Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
