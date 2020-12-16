@@ -1,6 +1,4 @@
-## springboot 学习demo
-
-### 记录个人学习过程，不定期更新
+## springboot 练习demo
 
 ## 填坑之路
 [踩坑经历,记录博客](https://blog.csdn.net/yanghao937170)
