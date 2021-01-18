@@ -22,7 +22,7 @@ http://localhost:8888/oauth/token?grant_type=client_credentials&scope=select&cli
 2. UserDetailsService 示例放在内存中，实际项目数据库保存
 
 #### Redis
-1.单机版redis Jackson2JsonRedisSerializer序列化类型（集群暂不做处理）
+1. 单机版redis Jackson2JsonRedisSerializer序列化类型（集群暂不做处理）
 2. token 存放redis，性能好点而且有自动过期机制
 
 #### Easyexcel
