@@ -10,7 +10,7 @@ public class MainSort {
     public static void main(String[] args) {
         int[] array = {23, 123, 8, 91, 2, 24, 88, 234, 22, 0, 4, 1321, 342, 13};
         System.out.println("排序前:          " + Arrays.toString(array));
-        System.out.println("排序后, 插入排序: " + Arrays.toString(InsertSort.insertSort(array)));
-
+        System.out.println("排序后, 插入排序: " + Arrays.toString(InsertionSort.insertionSort(array)));
+        System.out.println("--------------------------------------------------------------------------------\n");
     }
 }
