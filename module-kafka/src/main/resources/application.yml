@@ -5,7 +5,7 @@ spring:
   kafka:
     bootstrap-servers[0]: 127.0.0.1:9092
     # kafka topic 代码中写死
-    topic: my-topic
+    topic: my-topic-sync
     listener:
       missing-topics-fatal: false
     producer:
