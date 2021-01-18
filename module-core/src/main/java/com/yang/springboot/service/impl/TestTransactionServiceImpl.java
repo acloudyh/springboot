@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.concurrent.*;
 
 /**
  * @author Yang Hao
@@ -21,25 +22,32 @@ public class TestTransactionServiceImpl implements TestTransactionService {
     @Resource
     private TeacherRepo teacherRepo;
 
+    ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 5, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(), Executors.defaultThreadFactory(), new ThreadPoolExecutor.AbortPolicy());
+
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void serviceA() {
         TeacherDO teacherDO = new TeacherDO("zhangsan", "jiangsu");
         teacherRepo.save(teacherDO);
 
-//        try {
-//            serviceB();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
+        serviceB();
+
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     public void serviceB() {
-        TeacherDO teacherDO = new TeacherDO("lisi", "shanghai");
-        teacherRepo.save(teacherDO);
-        throw new RuntimeException("serviceB 发生了异常--------------");
+        threadPoolExecutor.execute(() -> {
+            for (int i = 0; i < 100; i++) {
+                TeacherDO teacherDO = new TeacherDO("lisi" + i, "shanghai" + i);
+                teacherRepo.save(teacherDO);
+                throw new RuntimeException("serviceB 发生了异常--------------");
+            }
+
+        });
+
+
     }
 
 
