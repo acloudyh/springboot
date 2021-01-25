@@ -14,8 +14,12 @@ public class MainSort {
 //        System.out.println("排序后, 插入排序: " + Arrays.toString(InsertionSort.insertionSort(array)));
 //        System.out.println("--------------------------------------------------------------------------------\n");
 
+//        System.out.println("排序前:          " + Arrays.toString(array));
+//        System.out.println("排序后, 选择排序: " + Arrays.toString(SelectionSort.selectionSort(array)));
+//        System.out.println("--------------------------------------------------------------------------------\n");
+
         System.out.println("排序前:          " + Arrays.toString(array));
-        System.out.println("排序后, 选择排序: " + Arrays.toString(SelectionSort.selectionSort(array)));
+        System.out.println("排序后, 冒泡排序: " + Arrays.toString(BubbleSort.bubbleSort(array)));
         System.out.println("--------------------------------------------------------------------------------\n");
     }
 }

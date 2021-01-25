@@ -17,7 +17,7 @@ public class SelectionSort {
             int minIndex = i;
             for (int j = i; j < array.length; j++) {
 
-                //二次循环, 如果当前的值小于minIndex 就替换;继续循环找到最小数
+                //二次循环, 如果当前的值小于minIndex 就替换
                 if (array[j] < array[minIndex]) {
                     minIndex = j;
                 }
