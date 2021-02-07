@@ -1,7 +1,9 @@
 ## springboot 练习
 
-## 填坑之路
-[踩坑经历,记录博客](https://blog.csdn.net/yanghao937170)
+## 博客
+[个人主页](https://acloudyh.github.io/categories/)
+
+[CSDN](https://blog.csdn.net/yanghao937170)
 
 ## 更新记录
 
