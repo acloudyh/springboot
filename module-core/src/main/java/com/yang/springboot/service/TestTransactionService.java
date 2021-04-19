@@ -9,4 +9,6 @@ public interface TestTransactionService {
     void serviceA();
 
     void serviceB();
+
+    void serviceC();
 }

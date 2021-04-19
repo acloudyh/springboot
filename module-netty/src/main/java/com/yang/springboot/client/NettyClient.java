@@ -20,8 +20,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class NettyClient {
-    private static final String HOST = "127.0.0.1";
-    private static final int PORT = 8999;
+    private static final String HOST = "54.223.46.110";
+    private static final int PORT = 50006;
 
     public static void main(String[] args) throws Exception {
 

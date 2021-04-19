@@ -24,9 +24,9 @@ public class TestTransactionController {
     private TestTransactionService testTransactionService;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    @ApiOperation(value = "测试事务嵌套", notes = "测试事务嵌套")
+    @ApiOperation(value = "测试事务", notes = "测试事务")
     public void testTransaction() {
         testTransactionService.serviceA();
-//        testTransactionService.serviceB();
+//        testTransactionService.serviceC();
     }
 }

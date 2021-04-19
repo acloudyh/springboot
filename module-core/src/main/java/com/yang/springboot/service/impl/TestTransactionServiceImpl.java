@@ -27,12 +27,17 @@ public class TestTransactionServiceImpl implements TestTransactionService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void serviceA() {
-        TeacherDO teacherDO = new TeacherDO("zhangsan", "jiangsu");
+        TeacherDO teacherDO = new TeacherDO("A", "A");
         teacherRepo.save(teacherDO);
+        serviceC();
+    }
 
-
-        serviceB();
-
+    @Override
+//    @Transactional(rollbackFor = Exception.class)
+    public void serviceC() {
+        TeacherDO teacherDO = new TeacherDO("C", "C");
+        teacherRepo.save(teacherDO);
+        int i =1/0;
     }
 
     @Override
