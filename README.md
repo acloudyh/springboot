@@ -9,6 +9,9 @@
 
 #### Netty
 [netty 学习 README.md](./module-netty/README.md)
+
+#### ShardingSphere 
+[ShardingSphere 分库分表/读写分离](https://mp.weixin.qq.com/s/A2MYOFT7SP-7kGOon8qJaw)
  
 
 #### Mongo
