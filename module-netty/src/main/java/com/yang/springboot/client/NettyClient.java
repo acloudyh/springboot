@@ -26,9 +26,12 @@ public class NettyClient {
     public static void main(String[] args) throws Exception {
 
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+        //1.创建客户端启动引导/辅助类：Bootstrap
         Bootstrap bootstrap = new Bootstrap();
         bootstrap
+                //2.指定线程模型
                 .group(workerGroup)
+                //NioSocketChannel 客户端
                 .channel(NioSocketChannel.class)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
@@ -41,6 +44,7 @@ public class NettyClient {
     }
 
     private static void connect(Bootstrap bootstrap, String host, int port) throws Exception {
+        // 3.尝试建立连接
         ChannelFuture channelFuture = bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
                 log.info("连接成功!");

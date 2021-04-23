@@ -33,7 +33,11 @@ import java.net.InetSocketAddress;
 @Component
 public class NettyServer {
     private static final ByteBuf[] DELIMITERS = {Unpooled.wrappedBuffer(new byte[]{0x7e})};
+    /**
+     * EventLoop 的主要作用实际就是责监听网络事件并调用事件处理器进行相关 I/O 操作（读写）的处理
+     */
     //bossGroup表示监听端口，accept 新连接的线程组，workerGroup表示处理每一条连接的数据读写的线程组
+    //1.bossGroup 用于接收连接，workerGroup 用于具体的处理
     private final EventLoopGroup bossGroup = new NioEventLoopGroup();
     private final EventLoopGroup workerGroup = new NioEventLoopGroup();
     private Channel channel;
@@ -42,12 +46,13 @@ public class NettyServer {
 
 
         try {
-            //创建serverBootstrap 实例
+            //2.创建服务端启动引导/辅助类：ServerBootstrap
             ServerBootstrap serverBootstrap = new ServerBootstrap();
 
             serverBootstrap
+                    //3.给引导类配置两大线程组,确定了线程模型
                     .group(bossGroup, workerGroup)
-                    //指定NIO传输方式
+                    //NioServerSocketChannel 指定NIO传输方式,服务端
                     .channel(NioServerSocketChannel.class)
                     //表示系统用于临时存放已完成三次握手的请求的队列的最大长度，如果连接建立频繁，服务器处理创建新连接较慢，可以适当调大这个参数
                     .option(ChannelOption.SO_BACKLOG, 1024)
@@ -60,6 +65,7 @@ public class NettyServer {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
 //                            //常规业务逻辑
+                            //ChannelHandler 是消息的具体处理器，主要负责处理客户端/服务端接收和发送的数据
                             ch.pipeline().addLast(new NettyServerHandler());
 
 //                            //固定长度的拆包器 FixedLengthFrameDecoder
@@ -85,7 +91,7 @@ public class NettyServer {
                         }
                     });
 
-//            //异步绑定服务器，调用sync()方法阻塞等待直到绑定完成
+//            //异步绑定服务器，调用sync()(使其变成同步) 方法阻塞等待直到绑定完成
 //            ChannelFuture channelFuture = serverBootstrap.bind(PORT).sync();
 
             ChannelFuture channelFuture = serverBootstrap.bind().sync().addListener(future -> {
