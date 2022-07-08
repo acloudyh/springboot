@@ -56,7 +56,6 @@
         <module>module-common</module>
         <module>module-api</module>
         <module>module-netty</module>
-        <module>module-hikvision-isapi</module>
     </modules>
 
     <dependencyManagement>
