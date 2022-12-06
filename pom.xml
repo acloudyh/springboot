@@ -28,7 +28,7 @@
         <spring-mobile-device.version>1.1.4.RELEASE</spring-mobile-device.version>
         <commons-codec.version>1.10</commons-codec.version>
         <commons-lang3.version>3.4</commons-lang3.version>
-        <commons-net.version>3.6</commons-net.version>
+        <commons-net.version>3.9.0</commons-net.version>
         <commons-io.version>2.5</commons-io.version>
         <netty.version>4.1.42.Final</netty.version>
         <joda-time.version>2.9.4</joda-time.version>
